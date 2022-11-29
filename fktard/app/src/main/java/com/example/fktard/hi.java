@@ -34,11 +34,18 @@ public class hi extends Activity implements OnClickListener{  // We going to mak
     {
         Intent intent = new Intent();
 
-        if( v == btn_start)
+        if (v == btn_start)
         {
-            intent.setClass(this,splash.class);
+            // intent --> to set to another class which another page or screen that we are launching.
+            intent.setClass(this, GamePage.class);
+            StateManager.Instance.ChangeState("MainGame"); // Default is like a loading page
+
         }
 
+        else if (v == btn_back)
+        {
+            intent.setClass(this, Mainmenu.class);
+        }
         startActivity(intent);
     }
 

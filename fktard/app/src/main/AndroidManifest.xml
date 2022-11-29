@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Fktard"
         tools:targetApi="31" >
     <activity
-        android:name = ".splash"
+        android:name = ".Splashpage"
     android:screenOrientation ="landscape"
         android:exported="true">
     <intent-filter>
@@ -22,7 +22,7 @@
     </intent-filter>
 </activity>
 <activity
-android:name = ".hi"
+android:name = ".Mainmenu"
 android:screenOrientation ="landscape"
 android:exported="true">
 <intent-filter>
@@ -30,5 +30,15 @@ android:exported="true">
     <category android:name = "android.intent.category.DEFAULT" />
 </intent-filter>
 </activity>
+<activity
+    android:name = ".GamePage"
+    android:screenOrientation ="landscape"
+    android:exported="true">
+    <intent-filter>
+        <action android:name = "android.intent.action.MAIN" />
+        <category android:name = "android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
+
     </application>
 </manifest>

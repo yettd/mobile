@@ -1,27 +1,22 @@
 package com.example.fktard;
 
-import android.app.Activity;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.view.SurfaceView;
 
 // Created by TanSiewLan2021
 
-public class MainGameSceneState implements StateBase {
+public class TestGameSceneState implements StateBase {
     private float timer = 0.0f;
 
     @Override
     public String GetName() {
-        return "MainGame";
+        return "NextGame";
     }
 
     @Override
     public void OnEnter(SurfaceView _view)
     {
         RenderBackground.Create();
-        text.Create();
-        EnitiySmurf.Create();
         // Example to include another Renderview for Pause Button
     }
 

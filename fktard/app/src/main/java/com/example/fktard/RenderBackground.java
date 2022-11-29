@@ -7,69 +7,65 @@ import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
 public class RenderBackground implements EntityBase {
-    public Bitmap bmp,scalebmp;
-    public DisplayMetrics metric;
-    int ScreenWitdh,ScreenHeight,xPos,yPos;
-    @Override
-
-
-    public boolean IsDone() {
-        return false;
+    private Bitmap bmp = null; // Using Android APi .. Bitmap to load images
+    private boolean isDone = false;
+    private float xPos = 0, yPos = 0;
+    Bitmap scaledbmp;
+    int ScreenWidth;
+    int ScreenHeight;
+    public boolean IsDone(){
+        return isDone;
     }
 
-    @Override
-    public void SetIsDone(boolean _isDone) {
-
+    public void SetIsDone(boolean _isDone){
+        isDone = _isDone;
     }
 
-    @Override
-    public void Init(SurfaceView _view) {
-        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.gamescene);
-     metric=_view.getResources().getDisplayMetrics();
-     ScreenWitdh = metric.widthPixels;
-     ScreenHeight=metric.heightPixels;
-     scalebmp=Bitmap.createScaledBitmap(bmp,ScreenWitdh,ScreenHeight,true);
+    public void Init(SurfaceView _view){
+        bmp = BitmapFactory.decodeResource(_view.getResources(),
+                R.drawable.gamescene);
+        //Display screensize
+        DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
+        ScreenWidth = metrics.widthPixels;
+        ScreenHeight = metrics.heightPixels;
+
+        scaledbmp = Bitmap.createScaledBitmap(bmp, ScreenWidth, ScreenHeight, true);
     }
 
-    @Override
-    public void Update(float _dt) {
+    public void Update(float _dt){
+
         xPos -= _dt * 500;
-        if (xPos < -ScreenWitdh) {
-            xPos=0;
+        if (xPos < -ScreenWidth){
+            xPos = 0;
         }
     }
 
-    @Override
-    public void Render(Canvas _canvas) {
-        _canvas.drawBitmap(scalebmp,xPos,yPos,null);
-        _canvas.drawBitmap(scalebmp,xPos+ ScreenWitdh,yPos+ScreenHeight,null);
-
+    public void Render(Canvas _canvas){
+        // 1st image to render on the screen at 0,0
+        _canvas.drawBitmap(scaledbmp,xPos, yPos, null);
+        _canvas.drawBitmap(scaledbmp,xPos + ScreenWidth, yPos, null);
+        // scroll leftwards to right
     }
 
-    @Override
-    public boolean IsInit() {
-        return bmp!=null;
+    public boolean IsInit(){
+        return bmp!= null;
     }
 
-    @Override
-    public int GetRenderLayer() {
+    public int GetRenderLayer(){
         return LayerConstants.BACKGROUND_LAYER;
     }
-
-    @Override
-    public void SetRenderLayer(int _newLayer) {
+    public void SetRenderLayer(int _newLayer){
+        return;
     }
 
-    @Override
-    public ENTITY_TYPE GetEntityType() {
-
+    public ENTITY_TYPE GetEntityType(){
         return ENTITY_TYPE.ENT_DEFAULT;
-
     }
-    public static RenderBackground Create()
-    {
-        RenderBackground result= new RenderBackground();
-        EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_DEFAULT);
+
+    public static RenderBackground Create(){
+        RenderBackground result = new RenderBackground();
+        EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_DEFAULT);
         return result;
     }
+
 }
