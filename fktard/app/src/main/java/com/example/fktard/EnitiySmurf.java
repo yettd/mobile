@@ -3,9 +3,12 @@ package com.example.fktard;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.view.SurfaceView;
 
 import androidx.appcompat.widget.ResourceManagerInternal;
+
+import java.util.Random;
 
 public class EnitiySmurf implements EntityBase,Collidable{
 
@@ -56,12 +59,21 @@ public class EnitiySmurf implements EntityBase,Collidable{
     @Override
     public void Init(SurfaceView _view) {
         bmp=BitmapFactory.decodeResource(_view.getResources(),R.drawable.smurf_sprite);
-        SpriteSheet=new sprite(bmp,4,4,16);
+        SpriteSheet=new sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite),4,4,16);
         isInit=true;
+
+        Random getRand=new Random();
+        xPos=getRand.nextFloat()*_view.getWidth();
+        yPos=getRand.nextFloat()*_view.getHeight();
     }
 
     @Override
     public void Update(float _dt) {
+
+        if(GameSystem.Instance.GetIsPaused())
+        {
+            return;
+        }
         if(TouchManager.Instance.HasTouch())
         {
            float imgRadius=SpriteSheet.GetWidth()*5.0f;
@@ -80,7 +92,14 @@ public class EnitiySmurf implements EntityBase,Collidable{
     }
 
     @Override
-    public void Render(Canvas _canvas) {
+    public void Render(Canvas _canvas)
+    {
+        float lifeTime=30;
+        float scaleFactor=0.5f+Math.abs((float) Math.sin(lifeTime));
+        Matrix transform=new Matrix();
+        transform.postTranslate(xPos,yPos);
+        transform.postScale(scaleFactor,scaleFactor);
+        transform.postRotate((float)Math.toDegrees(lifeTime));
         SpriteSheet.Render(_canvas,(int)xPos,(int)yPos);
     }
 

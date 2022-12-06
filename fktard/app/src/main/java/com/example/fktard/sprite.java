@@ -46,6 +46,7 @@ public class sprite {
         Rect des = new Rect(_x,_y,_x+width,_y+height);
         _canvas.drawBitmap(bmp,src,des,null);
     }
+
     public  void Update(float dt)
     {
         timeAcc+=dt;
