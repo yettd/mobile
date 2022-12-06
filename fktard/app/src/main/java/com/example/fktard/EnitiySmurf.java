@@ -122,6 +122,7 @@ public class EnitiySmurf implements EntityBase,Collidable{
     public ENTITY_TYPE GetEntityType() {
         return ENTITY_TYPE.ENT_SMURF;
     }
+
     public  static  EnitiySmurf Create(int _layer)
     {
 
