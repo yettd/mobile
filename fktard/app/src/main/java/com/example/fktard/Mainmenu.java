@@ -49,13 +49,16 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
         // Intent is an object provides runtime binding.
         // new instance of this object intent
 
+
+
         Intent intent = new Intent();
 
         if (v == btn_start)
         {
             // intent --> to set to another class which another page or screen that we are launching.
+            StateManager.Instance.ChangeState("faker"); // Default is like a loading page
             intent.setClass(this, GamePage.class);
- 				 StateManager.Instance.ChangeState("MainGame"); // Default is like a loading page
+
 
         }
 

@@ -27,7 +27,8 @@ public class GameSystem {
         // We will add all of our states into the state manager here!
         StateManager.Instance.AddState(new Mainmenu());
         StateManager.Instance.AddState(new MainGameSceneState());
-      //  StateManager.Instance.AddState(new TestGameSceneState());
+        StateManager.Instance.AddState(new fakerLoad());
+        StateManager.Instance.AddState(new miniGame3());
     }
 
     public void SetIsPaused(boolean _newIsPaused)

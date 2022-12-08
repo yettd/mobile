@@ -1,35 +1,36 @@
 package com.example.fktard;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.view.SurfaceView;
 
 // Created by TanSiewLan2021
 
-public class MainGameSceneState implements StateBase {
+public class fakerLoad extends Activity implements StateBase {
     private float timer = 0.0f;
-
+    float loadTimer=1;
     @Override
     public String GetName() {
-        return "MainGame";
+        return "faker";
     }
 
     @Override
     public void OnEnter(SurfaceView _view)
     {
         RenderBackground.Create();
-        text.Create();
-        EnitiySmurf.Create();
+      //  text.Create();
+       // EnitiySmurf.Create();
       //  pause.Create();
         // Example to include another Renderview for Pause Button
+
     }
 
     @Override
     public void OnExit() {
         EntityManager.Instance.Clean();
 
+        System.out.println(loadTimer);
     }
 
     @Override
@@ -43,12 +44,13 @@ public class MainGameSceneState implements StateBase {
     public void Update(float _dt) {
 
         EntityManager.Instance.Update(_dt);
-
-        if (TouchManager.Instance.IsDown()) {
-			
-            //Example of touch on screen in the main game to trigger back to Main menu
-             StateManager.Instance.ChangeState("miniGame3");
+        loadTimer-=_dt;
+        if(loadTimer<=0)
+        {
+            StateManager.Instance.ChangeState("MainGame");
         }
+
+
     }
 }
 

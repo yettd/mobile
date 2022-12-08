@@ -53,7 +53,7 @@ public class UpdateThread extends Thread {
         // This is to calculate delta time (more precise)
         long prevTime = System.nanoTime();
 
-        StateManager.Instance.Start("MainGame");  // To edit to whichever state to start with.
+        StateManager.Instance.Start("faker");  // To edit to whichever state to start with.
 
         // This is the game loop
         while (isRunning && StateManager.Instance.GetCurrentState() != "INVALID")

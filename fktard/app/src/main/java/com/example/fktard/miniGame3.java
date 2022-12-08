@@ -1,25 +1,22 @@
 package com.example.fktard;
 
-import android.app.Activity;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.view.SurfaceView;
 
 // Created by TanSiewLan2021
 
-public class MainGameSceneState implements StateBase {
+public class miniGame3 implements StateBase {
     private float timer = 0.0f;
 
     @Override
     public String GetName() {
-        return "MainGame";
+        return "miniGame3";
     }
 
     @Override
     public void OnEnter(SurfaceView _view)
     {
-        RenderBackground.Create();
+       // RenderBackground.Create();
         text.Create();
         EnitiySmurf.Create();
       //  pause.Create();
@@ -30,6 +27,7 @@ public class MainGameSceneState implements StateBase {
     public void OnExit() {
         EntityManager.Instance.Clean();
 
+        GamePage.Instance.finish();
     }
 
     @Override
@@ -47,7 +45,7 @@ public class MainGameSceneState implements StateBase {
         if (TouchManager.Instance.IsDown()) {
 			
             //Example of touch on screen in the main game to trigger back to Main menu
-             StateManager.Instance.ChangeState("miniGame3");
+             StateManager.Instance.ChangeState("Mainmenu");
         }
     }
 }

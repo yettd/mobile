@@ -34,13 +34,18 @@ public class StateManager {
     {
         // Add the state into the state map
         stateMap.put(_newState.GetName(), _newState);
+
+        System.out.println(stateMap +"AddedState");
     }
 
     void ChangeState(String _nextState)
     {
         // Try to assign the next state
+
+
         nextState = stateMap.get(_nextState);
 
+        System.out.println(nextState +"NEXT STEP");
         // If no next state, we assign back to current state
         if (nextState == null)
             nextState = currState;
@@ -53,6 +58,8 @@ public class StateManager {
         if (nextState != currState)
         {
             // We need to change state
+
+
             currState.OnExit();
             nextState.OnEnter(view);
             currState = nextState;

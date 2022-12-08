@@ -82,7 +82,6 @@ public class EnitiySmurf implements EntityBase,Collidable{
         if (startJump)
         {
             jumptimer += _dt ;
-            System.out.println(yPos);
             if (jumptimer < 0.5f)
             {
                 yPos -= 35.1f;
