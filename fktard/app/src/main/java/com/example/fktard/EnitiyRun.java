@@ -6,11 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.view.SurfaceView;
 
-import androidx.appcompat.widget.ResourceManagerInternal;
-
 import java.util.Random;
 
-public class EnitiySmurf implements EntityBase,Collidable{
+public class EnitiyRun implements EntityBase,Collidable{
 
     private Bitmap bmp=null;
     private  boolean isDone=false;
@@ -20,7 +18,6 @@ public class EnitiySmurf implements EntityBase,Collidable{
     private  boolean hasTouched=false;
     private float jumptimer = 0.0f;
     private boolean startJump = false;
-    private float maxY = 0;
 
     private  sprite SpriteSheet=null;
     @Override
@@ -62,13 +59,12 @@ public class EnitiySmurf implements EntityBase,Collidable{
     @Override
     public void Init(SurfaceView _view) {
         bmp=BitmapFactory.decodeResource(_view.getResources(),R.drawable.smurf_sprite);
-        SpriteSheet=new sprite(bmp,4,4,16);
+        SpriteSheet=new sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite),4,4,16);
         isInit=true;
 
         Random getRand=new Random();
-        xPos=150;
-        yPos= _view.getHeight() - 180.0f;
-        maxY = _view.getHeight() - 180.0f;
+        xPos=getRand.nextFloat()*_view.getWidth();
+        yPos=getRand.nextFloat()*_view.getHeight();
     }
 
     @Override
@@ -82,32 +78,27 @@ public class EnitiySmurf implements EntityBase,Collidable{
         if (startJump)
         {
             jumptimer += _dt ;
-            System.out.println(yPos);
+
             if (jumptimer < 0.5f)
             {
-                yPos -= 35.1f;
+                yPos += 0.1f;
             }
             else if (jumptimer >= 0.5f && jumptimer < 1.0f)
             {
-                yPos += 35.1f;
+                yPos -= 0.1f;
             }
             else
             {
-
                 startJump = false;
                 jumptimer = 0.0f;
             }
         }
-        if (yPos > maxY)
-        {
-            yPos = maxY;
-        }
+
         if(TouchManager.Instance.HasTouch())
         {
             startJump = true;
 
            float imgRadius=SpriteSheet.GetWidth()*5.0f;
-
 
 //           if(Collision.SphereToSphere(TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY(),0.0f,xPos,yPos,imgRadius)||hasTouched)
 //           {
@@ -154,17 +145,17 @@ public class EnitiySmurf implements EntityBase,Collidable{
         return ENTITY_TYPE.ENT_SMURF;
     }
 
-    public  static  EnitiySmurf Create(int _layer)
+    public  static EnitiyRun Create(int _layer)
     {
 
-        EnitiySmurf result=Create();
+        EnitiyRun result=Create();
         result.SetRenderLayer(_layer);
         return result;
     }
-    public  static  EnitiySmurf Create()
+    public  static EnitiyRun Create()
     {
 
-        EnitiySmurf result=new EnitiySmurf();
+        EnitiyRun result=new EnitiyRun();
         EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_SMURF);
         return result;
     }

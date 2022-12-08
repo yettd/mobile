@@ -25,6 +25,7 @@ public class sprite {
         bmp=_bmp;
         row=_row;
         col=_col;
+        System.out.println(bmp);
         timePerFrame=1.0f/(float)_fps;
         width=bmp.getWidth()/_col;
         height=bmp.getHeight()/_row;
