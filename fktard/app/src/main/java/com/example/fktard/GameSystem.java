@@ -29,6 +29,7 @@ public class GameSystem {
         StateManager.Instance.AddState(new MainGameSceneState());
         StateManager.Instance.AddState(new fakerLoad());
         StateManager.Instance.AddState(new miniGame3());
+        StateManager.Instance.AddState(new miniGame4());
     }
 
     public void SetIsPaused(boolean _newIsPaused)

@@ -1,36 +1,42 @@
 package com.example.fktard;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.view.SurfaceView;
 
 // Created by TanSiewLan2021
 
-public class fakerLoad extends Activity implements StateBase {
+public class miniGame4 implements StateBase {
     private float timer = 0.0f;
-    float loadTimer=1;
+
     @Override
     public String GetName() {
-        return "faker";
+        return "miniGame4";
     }
-
+    float D_live=3;
+    float TrashSpawn=1;
     @Override
     public void OnEnter(SurfaceView _view)
     {
-       // RenderBackground.Create();
-      //  text.Create();
-       // EnitiySmurf.Create();
-      //  pause.Create();
-        // Example to include another Renderview for Pause Button
+        RenderBackground.Create();
+        text.Create();
+        PlayerM4.Create();
+        //Dropper.Create();
+        //pause.Create();
+        //test();
 
+        // Example to include another Renderview for Pause Button
+    }
+
+    void test()
+    {
+        TrashBin.Create();
     }
 
     @Override
     public void OnExit() {
         EntityManager.Instance.Clean();
 
-        System.out.println(loadTimer);
+        GamePage.Instance.finish();
     }
 
     @Override
@@ -44,13 +50,18 @@ public class fakerLoad extends Activity implements StateBase {
     public void Update(float _dt) {
 
         EntityManager.Instance.Update(_dt);
-        loadTimer-=_dt;
-        if(loadTimer<=0)
+
+        if(Dropper.Instance.GetOut())
         {
-            StateManager.Instance.ChangeState("miniGame4");
+            D_live--;
+            Dropper.Instance.Reset();
         }
 
-
+        if (D_live<=0) {
+			
+            //Example of touch on screen in the main game to trigger back to Main menu
+             StateManager.Instance.ChangeState("Mainmenu");
+        }
     }
 }
 
