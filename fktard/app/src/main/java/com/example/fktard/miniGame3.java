@@ -18,7 +18,7 @@ public class miniGame3 implements StateBase {
     {
        // RenderBackground.Create();
         text.Create();
-        EnitiySmurf.Create();
+        Dropper.Create();
       //  pause.Create();
         // Example to include another Renderview for Pause Button
     }
