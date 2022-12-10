@@ -12,11 +12,12 @@ public class miniGame3 implements StateBase {
     public String GetName() {
         return "miniGame3";
     }
+    float D_live=3;
 
     @Override
     public void OnEnter(SurfaceView _view)
     {
-       // RenderBackground.Create();
+        RenderBackground.Create();
         text.Create();
         Dropper.Create();
       //  pause.Create();
@@ -42,7 +43,14 @@ public class miniGame3 implements StateBase {
 
         EntityManager.Instance.Update(_dt);
 
-        if (TouchManager.Instance.IsDown()) {
+
+        if(Dropper.Instance.GetOut())
+        {
+            D_live--;
+            Dropper.Instance.Reset();
+        }
+
+        if (D_live<=0) {
 			
             //Example of touch on screen in the main game to trigger back to Main menu
              StateManager.Instance.ChangeState("Mainmenu");

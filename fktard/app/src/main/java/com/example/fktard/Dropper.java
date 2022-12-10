@@ -4,13 +4,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
 import java.util.Random;
 
 public class Dropper implements EntityBase,Collidable{
 
+
+    public final static Dropper Instance = new Dropper();
     private Bitmap bmp=null;
+    private Bitmap Scalebmp=null;
     private  boolean isDone=false;
     private  float xPos,yPos;
     private  boolean isInit=false;
@@ -19,8 +23,15 @@ public class Dropper implements EntityBase,Collidable{
     private float jumptimer = 0.0f;
     private boolean startJump = false;
     private float maxY = 0;
-
+    private  boolean OutOfScreen=false;
     private  sprite SpriteSheet=null;
+    private  Bitmap[] asd={null,null,null};
+    private int screenWidth;
+    private int  screenHeight;
+
+
+    float live=3;
+
     @Override
     public String GetType() {
 
@@ -59,14 +70,34 @@ public class Dropper implements EntityBase,Collidable{
 
     @Override
     public void Init(SurfaceView _view) {
-        bmp=BitmapFactory.decodeResource(_view.getResources(),R.drawable.smurf_sprite);
-        SpriteSheet=new sprite(bmp,4,4,16);
+
         isInit=true;
 
-        Random getRand=new Random();
-        xPos=_view.getWidth()/2;
-        yPos= _view.getHeight() - 180.0f;
-        maxY = _view.getHeight() - 180.0f;
+        DisplayMetrics metric=_view.getResources().getDisplayMetrics();
+        screenWidth=metric.widthPixels;
+        screenHeight=metric.heightPixels;
+
+        bmp=BitmapFactory.decodeResource(_view.getResources(),
+                R.drawable.ship2_1);
+
+        Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
+        asd[0]=bmp;
+
+        bmp=BitmapFactory.decodeResource(_view.getResources(),
+                R.drawable.pause);
+
+        Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
+        asd[1]=bmp;
+
+        bmp=BitmapFactory.decodeResource(_view.getResources(),
+                R.drawable.ship2_1);
+
+        Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
+        asd[2]=bmp;
+
+        bmp=asd[0];
+        xPos=(screenWidth/2)-(bmp.getWidth()/2);
+        yPos=0;
     }
 
     @Override
@@ -79,44 +110,30 @@ public class Dropper implements EntityBase,Collidable{
 
         if (startJump)
         {
-            jumptimer += _dt ;
-            if (jumptimer < 0.5f)
-            {
-                yPos -= 35.1f;
-            }
-            else if (jumptimer >= 0.5f && jumptimer < 1.0f)
-            {
-                yPos += 35.1f;
-            }
-            else
-            {
-
-                startJump = false;
-                jumptimer = 0.0f;
-            }
+            yPos += 15.1f;
         }
-        if (yPos > maxY)
+        if(yPos>screenHeight)
         {
-            yPos = maxY;
+            OutOfScreen=true;
         }
         if(TouchManager.Instance.HasTouch())
         {
             startJump = true;
-
-           float imgRadius=SpriteSheet.GetWidth()*5.0f;
-
-
-//           if(Collision.SphereToSphere(TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY(),0.0f,xPos,yPos,imgRadius)||hasTouched)
-//           {
-//               hasTouched=true;
-//
-//               xPos=TouchManager.Instance.GetPosX();
-//               yPos=TouchManager.Instance.GetPosY();
-//
-//           }
         }
+    }
 
-        SpriteSheet.Update(_dt);
+    public boolean GetOut()
+    {
+        return OutOfScreen;
+    }
+    public void Reset()
+    {
+       startJump=false;
+       yPos=0;
+       OutOfScreen=false;
+       bmp=asd[1];
+
+        xPos=(screenWidth/2)-(bmp.getWidth()/2);
     }
 
     @Override
@@ -128,7 +145,7 @@ public class Dropper implements EntityBase,Collidable{
         transform.postTranslate(xPos,yPos);
         transform.postScale(scaleFactor,scaleFactor);
         transform.postRotate((float)Math.toDegrees(lifeTime));
-        SpriteSheet.Render(_canvas,(int)xPos,(int)yPos);
+        _canvas.drawBitmap(bmp,xPos, yPos, null);
     }
 
     @Override
@@ -154,14 +171,14 @@ public class Dropper implements EntityBase,Collidable{
     public  static Dropper Create(int _layer)
     {
 
-        Dropper result=Create();
+        Dropper result= Dropper.Instance;
         result.SetRenderLayer(_layer);
         return result;
     }
     public  static Dropper Create()
     {
 
-        Dropper result=new Dropper();
+        Dropper result=Dropper.Instance;
         EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_SMURF);
         return result;
     }
