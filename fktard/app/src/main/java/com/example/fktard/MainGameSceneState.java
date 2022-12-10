@@ -6,10 +6,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // Created by TanSiewLan2021
 
 public class MainGameSceneState implements StateBase {
     private float timer = 0.0f;
+
+    private List<pause> asd=new ArrayList<pause>();
 
     @Override
     public String GetName() {
@@ -44,11 +49,11 @@ public class MainGameSceneState implements StateBase {
 
         EntityManager.Instance.Update(_dt);
 
-//        if (TouchManager.Instance.IsDown()) {
-//
-//            //Example of touch on screen in the main game to trigger back to Main menu
-//             StateManager.Instance.ChangeState("miniGame3");
-//        }
+      if (TouchManager.Instance.IsDown()) {
+
+          //Example of touch on screen in the main game to trigger back to Main menu
+            StateManager.Instance.ChangeState("miniGame3");
+        }
     }
 }
 

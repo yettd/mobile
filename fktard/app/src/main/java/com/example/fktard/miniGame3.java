@@ -13,15 +13,22 @@ public class miniGame3 implements StateBase {
         return "miniGame3";
     }
     float D_live=3;
-
+    float TrashSpawn=1;
     @Override
     public void OnEnter(SurfaceView _view)
     {
         RenderBackground.Create();
         text.Create();
         Dropper.Create();
-      //  pause.Create();
+        //pause.Create();
+        test();
+
         // Example to include another Renderview for Pause Button
+    }
+
+    void test()
+    {
+        TrashBin.Create();
     }
 
     @Override
@@ -42,6 +49,17 @@ public class miniGame3 implements StateBase {
     public void Update(float _dt) {
 
         EntityManager.Instance.Update(_dt);
+
+        if(TrashSpawn<=0)
+        {
+
+            test();
+            TrashSpawn=1;
+        }
+        else
+        {
+            TrashSpawn-=_dt;
+        }
 
 
         if(Dropper.Instance.GetOut())

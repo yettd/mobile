@@ -28,6 +28,7 @@ public class ResourceManager {
             return resMap.get(_id);
 
         Bitmap result = BitmapFactory.decodeResource(res, _id);
+        System.out.println(res);
         resMap.put(_id, result);
         return result;
     }

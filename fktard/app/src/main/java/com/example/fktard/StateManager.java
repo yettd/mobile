@@ -35,7 +35,6 @@ public class StateManager {
         // Add the state into the state map
         stateMap.put(_newState.GetName(), _newState);
 
-        System.out.println(stateMap +"AddedState");
     }
 
     void ChangeState(String _nextState)
@@ -45,7 +44,6 @@ public class StateManager {
 
         nextState = stateMap.get(_nextState);
 
-        System.out.println(nextState +"NEXT STEP");
         // If no next state, we assign back to current state
         if (nextState == null)
             nextState = currState;

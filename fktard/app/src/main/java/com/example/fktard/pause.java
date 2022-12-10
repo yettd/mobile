@@ -1,6 +1,7 @@
 package com.example.fktard;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -42,8 +43,10 @@ public class pause implements EntityBase{
         screenWidth=metric.widthPixels;
         screenHeight=metric.heightPixels;
 
-        pauseImg=ResourceManager.Instance.GetBitmap(R.drawable.pause);
-        pauseImgUP=ResourceManager.Instance.GetBitmap(R.drawable.pause1);
+        pauseImg= BitmapFactory.decodeResource(_view.getResources(),
+                R.drawable.pause);;
+        pauseImgUP=BitmapFactory.decodeResource(_view.getResources(),
+                R.drawable.pause1);;
         scalebmp=Bitmap.createScaledBitmap(pauseImg,screenWidth,screenHeight,true);
         scalebmpUP=Bitmap.createScaledBitmap(pauseImgUP,screenWidth,screenHeight,true);
 

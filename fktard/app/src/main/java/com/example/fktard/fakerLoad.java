@@ -47,7 +47,7 @@ public class fakerLoad extends Activity implements StateBase {
         loadTimer-=_dt;
         if(loadTimer<=0)
         {
-            StateManager.Instance.ChangeState("MainGame");
+            StateManager.Instance.ChangeState("miniGame3");
         }
 
 
