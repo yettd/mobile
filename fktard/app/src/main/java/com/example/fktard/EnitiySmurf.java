@@ -11,7 +11,7 @@ import androidx.appcompat.widget.ResourceManagerInternal;
 import java.util.Random;
 
 public class EnitiySmurf implements EntityBase,Collidable{
-
+    public final static EnitiySmurf Instance = new EnitiySmurf();
     private Bitmap bmp=null;
     private  boolean isDone=false;
     private  float xPos,yPos;
@@ -41,7 +41,7 @@ public class EnitiySmurf implements EntityBase,Collidable{
 
     @Override
     public float GetRadius() {
-        return 0;
+        return 100;
     }
 
     @Override
@@ -67,8 +67,8 @@ public class EnitiySmurf implements EntityBase,Collidable{
 
         Random getRand=new Random();
         xPos=150;
-        yPos= _view.getHeight() - 180.0f;
-        maxY = _view.getHeight() - 180.0f;
+        yPos= _view.getHeight() - 150.0f;
+        maxY = _view.getHeight() - 150.0f;
     }
 
     @Override
@@ -84,11 +84,11 @@ public class EnitiySmurf implements EntityBase,Collidable{
             jumptimer += _dt ;
             if (jumptimer < 0.5f)
             {
-                yPos -= 35.1f;
+                yPos -= 50.1f;
             }
             else if (jumptimer >= 0.5f && jumptimer < 1.0f)
             {
-                yPos += 35.1f;
+                yPos += 50.1f;
             }
             else
             {
@@ -163,7 +163,7 @@ public class EnitiySmurf implements EntityBase,Collidable{
     public  static  EnitiySmurf Create()
     {
 
-        EnitiySmurf result=new EnitiySmurf();
+        EnitiySmurf result= EnitiySmurf.Instance;
         EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_SMURF);
         return result;
     }

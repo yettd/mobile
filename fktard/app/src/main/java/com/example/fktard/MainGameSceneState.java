@@ -16,6 +16,8 @@ public class MainGameSceneState implements StateBase {
 
     private List<pause> asd=new ArrayList<pause>();
 
+    float timerT = 0.0f;
+
     @Override
     public String GetName() {
         return "MainGame";
@@ -27,6 +29,7 @@ public class MainGameSceneState implements StateBase {
         RenderBackground.Create();
         text.Create();
         EnitiySmurf.Create();
+        Collectables.Create();
       //  pause.Create();
         // Example to include another Renderview for Pause Button
     }
@@ -49,11 +52,17 @@ public class MainGameSceneState implements StateBase {
 
         EntityManager.Instance.Update(_dt);
 
-      if (TouchManager.Instance.IsDown()) {
-
-          //Example of touch on screen in the main game to trigger back to Main menu
-            StateManager.Instance.ChangeState("miniGame3");
+        timerT += _dt;
+        if (timerT >= 5.0f)
+        {
+            Collectables.Create();
+            timerT = 0.0f;
         }
+//      if (TouchManager.Instance.IsDown()) {
+//
+//          //Example of touch on screen in the main game to trigger back to Main menu
+//            StateManager.Instance.ChangeState("miniGame3");
+//        }
     }
 }
 

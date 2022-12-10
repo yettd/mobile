@@ -7,7 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ResourceManager {
     public final static ResourceManager Instance = new ResourceManager();
@@ -16,6 +18,8 @@ public class ResourceManager {
     private HashMap<Integer, Bitmap> resMap = new HashMap<Integer, Bitmap>();
 
     private ResourceManager() {}
+
+    List<String> list = new ArrayList<String>();
 
     public void Init(SurfaceView _view)
     {
