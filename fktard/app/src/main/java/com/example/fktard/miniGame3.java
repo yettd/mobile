@@ -12,7 +12,6 @@ public class miniGame3 implements StateBase {
     public String GetName() {
         return "miniGame3";
     }
-    float D_live=3;
     float TrashSpawn=1;
     @Override
     public void OnEnter(SurfaceView _view)
@@ -22,6 +21,7 @@ public class miniGame3 implements StateBase {
         Dropper.Create();
         //pause.Create();
         test();
+        points.Create();
 
         // Example to include another Renderview for Pause Button
     }
@@ -35,7 +35,6 @@ public class miniGame3 implements StateBase {
     public void OnExit() {
         EntityManager.Instance.Clean();
 
-        GamePage.Instance.finish();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class miniGame3 implements StateBase {
         if(TrashSpawn<=0)
         {
 
-            test();
+           // test();
             TrashSpawn=1;
         }
         else
@@ -64,14 +63,27 @@ public class miniGame3 implements StateBase {
 
         if(Dropper.Instance.GetOut())
         {
-            D_live--;
+            ResourceManager.Instance.Live--;
             Dropper.Instance.Reset();
         }
 
-        if (D_live<=0) {
+        if (ResourceManager.Instance.Live<=0) {
 			
             //Example of touch on screen in the main game to trigger back to Main menu
-             StateManager.Instance.ChangeState("Mainmenu");
+             StateManager.Instance.ChangeState("MainGame");
+             Dropper.Instance.endGame=true;
+
+            ResourceManager.Instance.list.clear();
+            ResourceManager.Instance.Live=3;
+        }
+
+        if(Dropper.Instance.GetEndGame())
+        {
+            StateManager.Instance.ChangeState("MainGame");
+            Dropper.Instance.endGame=true;
+
+            ResourceManager.Instance.list.clear();
+            ResourceManager.Instance.Live=3;
         }
     }
 }

@@ -37,7 +37,12 @@ public class PlayerM4 implements EntityBase,Collidable{
     private  float timerJump;
 
     float live=3;
+    int list=0;
+    boolean endGame=false;
 
+    boolean status;
+
+    int type;
     @Override
     public String GetType() {
 
@@ -84,24 +89,46 @@ public class PlayerM4 implements EntityBase,Collidable{
         screenHeight=metric.heightPixels;
 
         bmp=BitmapFactory.decodeResource(_view.getResources(),
-                R.drawable.ship2_1);
+                R.drawable.paper);
 
         Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
         asd[0]=bmp;
 
         bmp=BitmapFactory.decodeResource(_view.getResources(),
-                R.drawable.pause);
+                R.drawable.platic);
 
         Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
         asd[1]=bmp;
 
         bmp=BitmapFactory.decodeResource(_view.getResources(),
-                R.drawable.ship2_1);
+                R.drawable.metal);
 
         Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
         asd[2]=bmp;
 
-        bmp=asd[0];
+
+
+        if(list==ResourceManager.Instance.list.size())
+        {
+            endGame=true;
+        }
+
+        if(ResourceManager.Instance.list.get(list)=="paper")
+        {
+            bmp=asd[0];
+            type=0;
+        }
+        else if(ResourceManager.Instance.list.get(list)=="platic")
+        {
+            bmp=asd[1];
+            type=1;
+        }
+        else if(ResourceManager.Instance.list.get(list)=="metal")
+        {
+            bmp=asd[2];
+            type=2;
+        }
+
         xPos=0;
         yPos=screenHeight-bmp.getHeight();
     }
@@ -113,7 +140,10 @@ public class PlayerM4 implements EntityBase,Collidable{
         {
             return;
         }
-
+        if(yPos>screenHeight)
+        {
+            OutOfScreen=true;
+        }
         if(TouchManager.Instance.HasTouch())
         {
             if(XSP==-1)
@@ -190,12 +220,41 @@ public class PlayerM4 implements EntityBase,Collidable{
     {
        startJump=false;
        yPos=0;
+
+        move=false;
        OutOfScreen=false;
        bmp=asd[1];
 
         xPos=(screenWidth/2)-(bmp.getWidth()/2);
-    }
 
+        list++;
+        status=true;
+        if(list==ResourceManager.Instance.list.size())
+        {
+            endGame=true;
+        }
+        if(endGame==false) {
+
+
+            if (ResourceManager.Instance.list.get(list) == "paper") {
+                type=0;
+                bmp = asd[0];
+            } else if (ResourceManager.Instance.list.get(list) == "platic") {
+                type=1;
+                bmp = asd[1];
+            } else if (ResourceManager.Instance.list.get(list) == "metal") {
+                type=2;
+                bmp = asd[2];
+            }
+
+            xPos=0;
+            yPos=screenHeight-bmp.getHeight();
+        }
+    }
+    public boolean GetEndGame()
+    {
+        return endGame;
+    }
     @Override
     public void Render(Canvas _canvas)
     {
@@ -206,6 +265,17 @@ public class PlayerM4 implements EntityBase,Collidable{
         transform.postScale(scaleFactor,scaleFactor);
         transform.postRotate((float)Math.toDegrees(lifeTime));
         _canvas.drawBitmap(bmp,xPos, yPos, null);
+    }
+
+    public void SetGetOut(boolean a)
+    {
+        OutOfScreen=a;
+    }
+
+
+    public int GetR()
+    {
+        return  bmp.getWidth();
     }
 
     @Override

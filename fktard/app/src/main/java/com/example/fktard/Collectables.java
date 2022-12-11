@@ -45,11 +45,11 @@ public class Collectables implements EntityBase{
         screenWidth=metric.widthPixels;
         screenHeight=metric.heightPixels;
 
-        bmp=ResourceManager.Instance.GetBitmap(R.drawable.pause1);
+        bmp=ResourceManager.Instance.GetBitmap(R.drawable.paper);
         bins[0]=bmp;
-        bmp=ResourceManager.Instance.GetBitmap(R.drawable.fbicon);
+        bmp=ResourceManager.Instance.GetBitmap(R.drawable.platic);
         bins[1]=bmp;
-        bmp=ResourceManager.Instance.GetBitmap(R.drawable.stone);
+        bmp=ResourceManager.Instance.GetBitmap(R.drawable.metal);
         bins[2]=bmp;
         bmp=ResourceManager.Instance.GetBitmap(R.drawable.star);
         bins[3]=bmp;
@@ -91,25 +91,25 @@ public class Collectables implements EntityBase{
         if (
         Collision.SphereToSphere
                 (
-                        EnitiySmurf.Instance.GetPosX(),
-                        EnitiySmurf.Instance.GetPosY(),
+                        EnitiySmurf.Instance.GetPosX()+EnitiySmurf.Instance.GetRadius(),
+                        EnitiySmurf.Instance.GetPosY()+EnitiySmurf.Instance.GetRadius(),
                         EnitiySmurf.Instance.GetRadius(),
-                        xPos,
-                        yPos,
-                        100
+                        xPos+bmp.getWidth(),
+                        yPos+bmp.getHeight(),
+                        10
                 ) == true
             )
         {
             switch (type)
             {
                 case 0 :
-                    ResourceManager.Instance.list.add("pause");
+                    ResourceManager.Instance.list.add("paper");
                     break;
                 case 1 :
-                    ResourceManager.Instance.list.add("fb");
+                    ResourceManager.Instance.list.add("platic");
                     break;
                 case 2 :
-                    ResourceManager.Instance.list.add("stone");
+                    ResourceManager.Instance.list.add("metal");
                     break;
                 case 3 :
                     ResourceManager.Instance.list.removeAll(ResourceManager.Instance.list);
@@ -162,14 +162,16 @@ public class Collectables implements EntityBase{
 
         if(type==0)
         {
-            bmp=ResourceManager.Instance.GetBitmap(R.drawable.pause1);
+            bmp=ResourceManager.Instance.GetBitmap(R.drawable.paper);
         }
         else if(type==1)
         {
-            bmp=ResourceManager.Instance.GetBitmap(R.drawable.fbicon);
+            bmp=ResourceManager.Instance.GetBitmap(R.drawable.platic);
         } else if(type==2)
         {
-            bmp=ResourceManager.Instance.GetBitmap(R.drawable.stone);
+            bmp=ResourceManager.Instance.GetBitmap(R.drawable.metal);
+
+
         }else if(type==3)
         {
             bmp=ResourceManager.Instance.GetBitmap(R.drawable.star);

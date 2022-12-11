@@ -30,6 +30,8 @@ public class GameSystem {
         StateManager.Instance.AddState(new fakerLoad());
         StateManager.Instance.AddState(new miniGame3());
         StateManager.Instance.AddState(new miniGame4());
+        StateManager.Instance.AddState(new messageStage());
+        StateManager.Instance.AddState(new miniGameShowPoint());
     }
 
     public void SetIsPaused(boolean _newIsPaused)

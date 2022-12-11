@@ -23,6 +23,7 @@ public class miniGame4 implements StateBase {
         //Dropper.Create();
         //pause.Create();
         //test();
+        points.Create();
 
         // Example to include another Renderview for Pause Button
     }
@@ -36,7 +37,7 @@ public class miniGame4 implements StateBase {
     public void OnExit() {
         EntityManager.Instance.Clean();
 
-        GamePage.Instance.finish();
+
     }
 
     @Override
@@ -51,16 +52,40 @@ public class miniGame4 implements StateBase {
 
         EntityManager.Instance.Update(_dt);
 
-        if(Dropper.Instance.GetOut())
+        if(TrashSpawn<=0)
         {
-            D_live--;
-            Dropper.Instance.Reset();
+
+           TrashBinForGame4.Create();
+            TrashSpawn=10;
+        }
+        else
+        {
+            TrashSpawn-=_dt;
         }
 
-        if (D_live<=0) {
+
+
+        if(PlayerM4.Instance.GetOut())
+        {
+            ResourceManager.Instance.Live--;
+            PlayerM4.Instance.Reset();
+        }
+
+
+        if (ResourceManager.Instance.Live<=0) {
 			
             //Example of touch on screen in the main game to trigger back to Main menu
-             StateManager.Instance.ChangeState("Mainmenu");
+             StateManager.Instance.ChangeState("score");
+             PlayerM4.Instance.endGame=true;
+
+            ResourceManager.Instance.list.clear();
+        }
+        if(PlayerM4.Instance.GetEndGame())
+        {
+            StateManager.Instance.ChangeState("score");
+            PlayerM4.Instance.endGame=true;
+
+            ResourceManager.Instance.list.clear();
         }
     }
 }

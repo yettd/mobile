@@ -18,6 +18,7 @@ public class MainGameSceneState implements StateBase {
 
     float timerT = 0.0f;
 
+    float gameTimer = 10.0f;
     @Override
     public String GetName() {
         return "MainGame";
@@ -30,6 +31,7 @@ public class MainGameSceneState implements StateBase {
         text.Create();
         EnitiySmurf.Create();
         Collectables.Create();
+        points.Create();
       //  pause.Create();
         // Example to include another Renderview for Pause Button
     }
@@ -57,6 +59,47 @@ public class MainGameSceneState implements StateBase {
         {
             Collectables.Create();
             timerT = 0.0f;
+        }
+        if(gameTimer<=0)
+        {
+            if(Dropper.Instance.GetEndGame()==false && Messagetext.Instance.game1==false)
+            {
+                if(ResourceManager.Instance.list.size()==0)
+                {
+                    StateManager.Instance.ChangeState("MS");
+                }
+                else
+                {
+
+                    StateManager.Instance.ChangeState("miniGame3");
+
+
+                }
+            }
+            else  if(Dropper.Instance.GetEndGame()==true || Messagetext.Instance.game1==true && PlayerM4.Instance.GetEndGame()==false)
+            {
+                if(ResourceManager.Instance.list.size()==0 )
+                {
+
+                    StateManager.Instance.ChangeState("MS");
+                }
+                else
+                {
+                    StateManager.Instance.ChangeState("miniGame4");
+
+
+                }
+
+            }
+            else
+            {
+
+            }
+            gameTimer=5;
+        }
+        else
+        {
+            gameTimer-=_dt;
         }
 //      if (TouchManager.Instance.IsDown()) {
 //

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
@@ -29,8 +30,13 @@ public class Dropper implements EntityBase,Collidable{
     private int screenWidth;
     private int  screenHeight;
 
+    boolean status=true;
 
+    boolean endGame;
     float live=3;
+
+    int type=0;
+    int list=0;
 
     @Override
     public String GetType() {
@@ -78,26 +84,50 @@ public class Dropper implements EntityBase,Collidable{
         screenHeight=metric.heightPixels;
 
         bmp=BitmapFactory.decodeResource(_view.getResources(),
-                R.drawable.ship2_1);
+                R.drawable.paper);
 
         Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
         asd[0]=bmp;
 
         bmp=BitmapFactory.decodeResource(_view.getResources(),
-                R.drawable.pause);
+                R.drawable.platic);
 
         Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
         asd[1]=bmp;
 
         bmp=BitmapFactory.decodeResource(_view.getResources(),
-                R.drawable.ship2_1);
+                R.drawable.metal);
 
         Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
         asd[2]=bmp;
 
-        bmp=asd[0];
+        if(list==ResourceManager.Instance.list.size())
+        {
+            endGame=true;
+        }
+
+        if(ResourceManager.Instance.list.get(list)=="paper")
+        {
+            bmp=asd[0];
+            type=0;
+        }
+        else if(ResourceManager.Instance.list.get(list)=="platic")
+        {
+            bmp=asd[1];
+            type=1;
+        }
+        else if(ResourceManager.Instance.list.get(list)=="metal")
+        {
+            bmp=asd[2];
+            type=2;
+        }
         xPos=(screenWidth/2)-(bmp.getWidth()/2);
         yPos=0;
+    }
+
+    public boolean GetEndGame()
+    {
+        return endGame;
     }
 
     @Override
@@ -131,21 +161,52 @@ public class Dropper implements EntityBase,Collidable{
        startJump=false;
        yPos=0;
        OutOfScreen=false;
-       bmp=asd[1];
+       list++;
+        status=true;
+       if(list==ResourceManager.Instance.list.size())
+       {
+            endGame=true;
+       }
+        if(endGame==false) {
 
-        xPos=(screenWidth/2)-(bmp.getWidth()/2);
+
+            if (ResourceManager.Instance.list.get(list) == "paper") {
+                type=0;
+                bmp = asd[0];
+            } else if (ResourceManager.Instance.list.get(list) == "platic") {
+                type=1;
+                bmp = asd[1];
+            } else if (ResourceManager.Instance.list.get(list) == "metal") {
+                type=2;
+                bmp = asd[2];
+            }
+
+            xPos = (screenWidth / 2) - (bmp.getWidth() / 2);
+        }
+    }
+
+    public void SetGetOut(boolean a)
+    {
+        OutOfScreen=a;
+    }
+
+    public int GetR()
+    {
+      return  bmp.getWidth();
     }
 
     @Override
     public void Render(Canvas _canvas)
     {
-        float lifeTime=30;
-        float scaleFactor=0.5f+Math.abs((float) Math.sin(lifeTime));
-        Matrix transform=new Matrix();
-        transform.postTranslate(xPos,yPos);
-        transform.postScale(scaleFactor,scaleFactor);
-        transform.postRotate((float)Math.toDegrees(lifeTime));
-        _canvas.drawBitmap(bmp,xPos, yPos, null);
+        if(status) {
+            float lifeTime = 30;
+            float scaleFactor = 0.5f + Math.abs((float) Math.sin(lifeTime));
+            Matrix transform = new Matrix();
+            transform.postTranslate(xPos, yPos);
+            transform.postScale(scaleFactor, scaleFactor);
+            transform.postRotate((float) Math.toDegrees(lifeTime));
+            _canvas.drawBitmap(bmp, xPos, yPos, null);
+        }
     }
 
     @Override

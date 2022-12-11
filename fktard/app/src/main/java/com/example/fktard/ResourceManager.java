@@ -16,7 +16,8 @@ public class ResourceManager {
 
     private Resources res = null;
     private HashMap<Integer, Bitmap> resMap = new HashMap<Integer, Bitmap>();
-
+    int point=0;
+    int Live=3;
     private ResourceManager() {}
 
     List<String> list = new ArrayList<String>();

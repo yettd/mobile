@@ -22,6 +22,8 @@ public class TrashBin implements EntityBase{
     float xPos,yPos;
     int screenWidth,screenHeight;
     float buttonDelay=0;
+
+    int LOR;
 int type;
     private  Bitmap[] bins={null,null,null};
     @Override
@@ -44,25 +46,88 @@ int type;
         screenHeight=metric.heightPixels;
 
 
-        bmp=ResourceManager.Instance.GetBitmap(R.drawable.pause1);
+        bmp=ResourceManager.Instance.GetBitmap(R.drawable.paperbin);
         bins[0]=bmp;
-        bmp=ResourceManager.Instance.GetBitmap(R.drawable.fbicon);
+        bmp=ResourceManager.Instance.GetBitmap(R.drawable.plasticbin);
         bins[1]=bmp;
-        bmp=ResourceManager.Instance.GetBitmap(R.drawable.stone);
+        bmp=ResourceManager.Instance.GetBitmap(R.drawable.metalbin);
         bins[2]=bmp;
 
         Random r=new Random();
+
+
         type=r.nextInt(3);
 
-        xPos=screenWidth-150;
-        yPos=150;
+        int nxt=r.nextInt(2);
+
+        switch (nxt)
+        {
+            case 0 :
+                yPos=(screenHeight-bmp.getHeight()) / 2;
+                break;
+            case 1 :
+                yPos=screenHeight-bmp.getHeight();
+                break;
+            default:
+                break;
+        }
+        LOR=r.nextInt(2);
+
+        switch (LOR)
+        {
+            case 0 :
+                xPos=0;
+                break;
+            case 1 :
+                xPos=screenWidth-150;
+                break;
+            default:
+                break;
+        }
+
+
+      //  xPos=(screenWidth/2)-(bmp.getWidth()/2);
     }
 
     @Override
     public void Update(float _dt) {
         buttonDelay +=_dt;
 
-        xPos-=15;
+        if(LOR==0)
+        {
+            xPos+=15;
+
+        }
+        else if(LOR==1)
+        {
+            xPos-=15;
+        }
+
+        if (
+                Collision.SphereToSphere
+                        (
+                                Dropper.Instance.GetPosX()+Dropper.Instance.GetR(),
+                                Dropper.Instance.GetPosY()+Dropper.Instance.GetR(),
+                                Dropper.Instance.GetR(),
+                                xPos+bmp.getWidth(),
+                                yPos+bmp.getHeight(),
+                                bmp.getHeight()
+                        ) == true
+        )
+        {
+                Dropper.Instance.status=false;
+                if(type==Dropper.Instance.type)
+                {
+                    ResourceManager.Instance.point++;
+                }
+                else
+                {
+                   Dropper.Instance.SetGetOut(true);
+                    return;
+                }
+                Dropper.Instance.Reset();
+
+        }
 
     }
 
@@ -71,14 +136,14 @@ int type;
 
         if(type==0)
         {
-            bmp=ResourceManager.Instance.GetBitmap(R.drawable.pause1);
+            bmp=ResourceManager.Instance.GetBitmap(R.drawable.paperbin);
         }
         else if(type==1)
         {
-            bmp=ResourceManager.Instance.GetBitmap(R.drawable.fbicon);
+            bmp=ResourceManager.Instance.GetBitmap(R.drawable.plasticbin);
         } else if(type==2)
         {
-            bmp=ResourceManager.Instance.GetBitmap(R.drawable.stone);
+            bmp=ResourceManager.Instance.GetBitmap(R.drawable.metalbin);
         }
         _canvas.drawBitmap(bmp,xPos, yPos, null);
     }
