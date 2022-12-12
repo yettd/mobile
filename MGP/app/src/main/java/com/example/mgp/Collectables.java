@@ -174,7 +174,7 @@ public class Collectables implements EntityBase{
 
         }else if(type==3)
         {
-            bmp=ResourceManager.Instance.GetBitmap(R.drawable.star);
+            bmp=ResourceManager.Instance.GetBitmap(R.drawable.trash);
         }
         _canvas.drawBitmap(bmp,xPos, yPos, null);
     }
