@@ -1,4 +1,4 @@
-package com.example.fktard;
+package com.example.a1_mobile;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

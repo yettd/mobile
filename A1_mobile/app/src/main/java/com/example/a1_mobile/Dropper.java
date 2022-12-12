@@ -1,23 +1,23 @@
-package com.example.fktard;
+package com.example.a1_mobile;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
-public class PlayerM4 implements EntityBase,Collidable{
+import java.util.Random;
+
+public class Dropper implements EntityBase,Collidable{
 
 
-    public final static PlayerM4 Instance = new PlayerM4();
+    public final static Dropper Instance = new Dropper();
     private Bitmap bmp=null;
     private Bitmap Scalebmp=null;
     private  boolean isDone=false;
     private  float xPos,yPos;
-
-    private  float XSP=-100,YSP=-100,FXSP=-100,FYSP=-100;
-
     private  boolean isInit=false;
     private int renderLayer=0;
     private  boolean hasTouched=false;
@@ -30,18 +30,14 @@ public class PlayerM4 implements EntityBase,Collidable{
     private int screenWidth;
     private int  screenHeight;
 
-    private boolean move;
-    private float xDiff;
-    private  float yDiff;
-    private  float timerJump;
+    boolean status=true;
 
+    boolean endGame;
     float live=3;
+
+    int type=0;
     int list=0;
-    boolean endGame=false;
 
-    boolean status;
-
-    int type;
     @Override
     public String GetType() {
 
@@ -105,7 +101,6 @@ public class PlayerM4 implements EntityBase,Collidable{
         Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
         asd[2]=bmp;
 
-
         if(list==ResourceManager.Instance.list.size())
         {
             endGame=true;
@@ -126,10 +121,13 @@ public class PlayerM4 implements EntityBase,Collidable{
             bmp=asd[2];
             type=2;
         }
+        xPos=(screenWidth/2)-(bmp.getWidth()/2);
+        yPos=0;
+    }
 
-
-        xPos=0;
-        yPos=screenHeight-bmp.getHeight();
+    public boolean GetEndGame()
+    {
+        return endGame;
     }
 
     @Override
@@ -139,75 +137,18 @@ public class PlayerM4 implements EntityBase,Collidable{
         {
             return;
         }
+
+        if (startJump)
+        {
+            yPos += 15.1f;
+        }
         if(yPos>screenHeight)
         {
             OutOfScreen=true;
         }
         if(TouchManager.Instance.HasTouch())
         {
-            if(XSP==-1)
-            {
-                XSP=TouchManager.Instance.GetPosX();
-                YSP=TouchManager.Instance.GetPosY();
-            }
-            else
-            {
-                FXSP=TouchManager.Instance.GetPosX();
-                FYSP=TouchManager.Instance.GetPosY();
-            }
-        }
-        if(!TouchManager.Instance.HasTouch() && move==false)
-        {
-            if(XSP==-1)
-            {
-
-            }
-            else
-            {
-                xDiff=FXSP-XSP;
-                yDiff=(YSP-FYSP);
-                timerJump=yDiff/100;
-
-                if(timerJump>3)
-                {
-                    timerJump=3;
-                }
-
-                if(yDiff>300)
-                {
-                    yDiff=250;
-                }
-                if(xDiff>300)
-                {
-                    xDiff=300;
-                }
-                move=true;
-                XSP=-1;
-                YSP=-1;
-                FXSP=-1;
-                FYSP=-1;
-            }
-        }
-
-        if(move)
-        {
-            xPos+=xDiff*_dt;
-
-            if(timerJump>0)
-            {
-
-                yPos-=yDiff*_dt;
-                if(yPos<=0)
-                {
-                    timerJump=0;
-                }
-                timerJump-=_dt;
-            }
-            else
-            {
-
-                yPos+=yDiff*_dt;
-            }
+            startJump = true;
         }
     }
 
@@ -219,19 +160,13 @@ public class PlayerM4 implements EntityBase,Collidable{
     {
        startJump=false;
        yPos=0;
-
-        move=false;
        OutOfScreen=false;
-       bmp=asd[1];
-
-        xPos=(screenWidth/2)-(bmp.getWidth()/2);
-
-        list++;
+       list++;
         status=true;
-        if(list==ResourceManager.Instance.list.size())
-        {
+       if(list==ResourceManager.Instance.list.size())
+       {
             endGame=true;
-        }
+       }
         if(endGame==false) {
 
 
@@ -246,24 +181,8 @@ public class PlayerM4 implements EntityBase,Collidable{
                 bmp = asd[2];
             }
 
-            xPos=0;
-            yPos=screenHeight-bmp.getHeight();
+            xPos = (screenWidth / 2) - (bmp.getWidth() / 2);
         }
-    }
-    public boolean GetEndGame()
-    {
-        return endGame;
-    }
-    @Override
-    public void Render(Canvas _canvas)
-    {
-        float lifeTime=30;
-        float scaleFactor=0.5f+Math.abs((float) Math.sin(lifeTime));
-        Matrix transform=new Matrix();
-        transform.postTranslate(xPos,yPos);
-        transform.postScale(scaleFactor,scaleFactor);
-        transform.postRotate((float)Math.toDegrees(lifeTime));
-        _canvas.drawBitmap(bmp,xPos, yPos, null);
     }
 
     public void SetGetOut(boolean a)
@@ -271,10 +190,23 @@ public class PlayerM4 implements EntityBase,Collidable{
         OutOfScreen=a;
     }
 
-
     public int GetR()
     {
-        return  bmp.getWidth();
+      return  bmp.getWidth();
+    }
+
+    @Override
+    public void Render(Canvas _canvas)
+    {
+        if(status) {
+            float lifeTime = 30;
+            float scaleFactor = 0.5f + Math.abs((float) Math.sin(lifeTime));
+            Matrix transform = new Matrix();
+            transform.postTranslate(xPos, yPos);
+            transform.postScale(scaleFactor, scaleFactor);
+            transform.postRotate((float) Math.toDegrees(lifeTime));
+            _canvas.drawBitmap(bmp, xPos, yPos, null);
+        }
     }
 
     @Override
@@ -297,17 +229,17 @@ public class PlayerM4 implements EntityBase,Collidable{
         return ENTITY_TYPE.ENT_SMURF;
     }
 
-    public  static PlayerM4 Create(int _layer)
+    public  static Dropper Create(int _layer)
     {
 
-        PlayerM4 result= PlayerM4.Instance;
+        Dropper result= Dropper.Instance;
         result.SetRenderLayer(_layer);
         return result;
     }
-    public  static PlayerM4 Create()
+    public  static Dropper Create()
     {
 
-        PlayerM4 result= PlayerM4.Instance;
+        Dropper result=Dropper.Instance;
         EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_SMURF);
         return result;
     }
