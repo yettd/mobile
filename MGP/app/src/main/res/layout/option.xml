@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgnd"
+    android:orientation="horizontal">
+
+    <SeekBar
+        android:id="@+id/asd"
+        android:layout_width="266dp"
+        android:layout_height="71dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="93dp"
+        android:layout_marginRight="249dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="121dp"
+        android:layout_marginRight="554dp"
+        android:text="Sound"
+        android:textColor="#FFFFFF
+"/>
+
+    <Button
+        android:id="@+id/backToMain"
+        android:layout_width="151dp"
+        android:layout_height="72dp"
+        android:text="Back" />
+</RelativeLayout>
