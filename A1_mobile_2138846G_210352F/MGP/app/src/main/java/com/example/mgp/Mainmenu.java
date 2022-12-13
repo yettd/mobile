@@ -72,6 +72,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
 
             Dropper.Instance.SetEndGame(false);
             PlayerM4.Instance.SetEndGame(false);
+            ResourceManager.Instance.Live=3;
 
 
             intent.setClass(this, GamePage.class);
