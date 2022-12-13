@@ -84,7 +84,6 @@ public class miniGame4 implements StateBase {
              StateManager.Instance.ChangeState("score");
              PlayerM4.Instance.endGame=true;
             Messagetext.Instance.game2=true;
-
             ResourceManager.Instance.list.clear();
         }
         //jun kai

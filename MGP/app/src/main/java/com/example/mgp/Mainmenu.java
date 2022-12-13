@@ -70,6 +70,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
             textView.setText(stateMap.size() +"");
 
 
+            ResourceManager.Instance.Live=3;
             Dropper.Instance.SetEndGame(false);
             PlayerM4.Instance.SetEndGame(false);
 
