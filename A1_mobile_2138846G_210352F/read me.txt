@@ -1,0 +1,48 @@
+How to play
+----------------------
+
+First game:
+Player will jump up and down by tapping the screen 
+
+Player will be able to collect recyclable material (plastic, metal, paper)
+
+This material will be store and use in the other minigame
+
+Once the player hit a trash can for the first time the player will move to the first mini game
+
+If it the second time the player will move to the second mini game
+
+If they have no material they will skip the minigame
+
+First mini game
+The player will go in order of the material they collected.
+The player will drop themselves by tapping the screen
+If the player hit the wrong trash bin they lose a life and change to the next material
+If the completely misses they just change to the next material 
+If they hit the correct they gain a point and change to the next material
+
+By the end of the minigame all material they collected is clear
+
+Second mini game
+
+The player will go in order of the material they collected.
+The player will flick their screen and launch the player toward a trash bin
+The player can bounce of the top of the screen but not the bottom of it
+If the player hit the wrong trash bin they lose a life and change to the next material
+If the completely misses they just change to the next material 
+If they hit the correct they gain a point and change to the next material
+-------------------
+Task List
+-------------------
+Sheng heng:
+Player movement for the runner part of the game
+Spawning of the different material
+Collecting data of the material collected
+
+Jun Kai
+The two mini games
+Point
+Message state for no material to play minigame
+pause
+
+
