@@ -47,10 +47,10 @@ public class pause implements EntityBase{
                 R.drawable.pause);;
         pauseImgUP=BitmapFactory.decodeResource(_view.getResources(),
                 R.drawable.pause1);;
-        scalebmp=Bitmap.createScaledBitmap(pauseImg,screenWidth,screenHeight,true);
-        scalebmpUP=Bitmap.createScaledBitmap(pauseImgUP,screenWidth,screenHeight,true);
+        scalebmp = Bitmap.createScaledBitmap(pauseImg, (int) (pauseImg.getWidth() * 0.65f), (int) (pauseImg.getWidth() * 0.65f), true);
+        scalebmpUP = Bitmap.createScaledBitmap(pauseImgUP, (int) (pauseImgUP.getWidth() * 0.65f), (int) (pauseImgUP.getWidth() * 0.65f), true);
 
-        xPos=screenWidth-150;
+        xPos=0+scalebmp.getWidth();
         yPos=150;
     }
 
@@ -66,11 +66,21 @@ public class pause implements EntityBase{
 
                 if(Collision.SphereToSphere(TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY(),0.0f,xPos,yPos,imgRadius)&& buttonDelay>=0.5)
                 {
+                    if(isPause==true)
+                    {
+                        isPause=false;
+                        GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
+
+                    }
+                    else
+                    {
                     isPause=true;
+                        GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
+
+                    }
 
                 }
                 buttonDelay=0;
-                GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
             }
         }
         else isPause=false;

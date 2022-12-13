@@ -94,6 +94,10 @@ public class TrashBinForGame4 implements EntityBase{
     @Override
     public void Update(float _dt) {
 
+        if(GameSystem.Instance.GetIsPaused()==true)
+        {
+            return;
+        }
 
         if(timer>0)
         {
@@ -108,14 +112,15 @@ public class TrashBinForGame4 implements EntityBase{
             if (
                     Collision.SphereToSphere
                             (
-                                    PlayerM4.Instance.GetPosX() + PlayerM4.Instance.GetR(),
-                                    PlayerM4.Instance.GetPosY() + PlayerM4.Instance.GetR(),
-                                    PlayerM4.Instance.GetR(),
-                                    xPos + bmp.getWidth(),
-                                    yPos + bmp.getHeight(),
-                                    bmp.getHeight()
+                                    Dropper.Instance.GetPosX()+Dropper.Instance.GetR(),
+                                    Dropper.Instance.GetPosY()+Dropper.Instance.GetR(),
+                                    Dropper.Instance.GetR(),
+                                    xPos+bmp.getWidth()/2,
+                                    yPos+bmp.getHeight()/2,
+                                    bmp.getWidth()/2
                             ) == true
-            ) {
+            )
+            {
                 PlayerM4.Instance.status = false;
                 if (type == Dropper.Instance.type) {
                     ResourceManager.Instance.point++;

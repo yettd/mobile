@@ -19,7 +19,7 @@ public class miniGame3 implements StateBase {
         RenderBackground.Create();
         text.Create();
         Dropper.Create();
-        //pause.Create();
+        pause.Create();
         test();
         points.Create();
 
@@ -49,6 +49,10 @@ public class miniGame3 implements StateBase {
 
         EntityManager.Instance.Update(_dt);
 
+        if(GameSystem.Instance.GetIsPaused()==true)
+        {
+            return;
+        }
         if(TrashSpawn<=0)
         {
 

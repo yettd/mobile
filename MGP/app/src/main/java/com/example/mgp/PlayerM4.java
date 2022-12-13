@@ -135,7 +135,7 @@ public class PlayerM4 implements EntityBase,Collidable{
     @Override
     public void Update(float _dt) {
 
-        if(GameSystem.Instance.GetIsPaused())
+        if(GameSystem.Instance.GetIsPaused()==true)
         {
             return;
         }
@@ -257,6 +257,10 @@ public class PlayerM4 implements EntityBase,Collidable{
     public boolean GetEndGame()
     {
         return endGame;
+    }
+    public void SetEndGame(boolean a)
+    {
+        endGame=a;
     }
     @Override
     public void Render(Canvas _canvas)

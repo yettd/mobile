@@ -21,7 +21,7 @@ public class miniGameShowPoint implements StateBase {
         text.Create();
        // PlayerM4.Create();
         //Dropper.Create();
-        //pause.Create();
+        pause.Create();
         //test();
         points.Create();
 
@@ -52,10 +52,13 @@ public class miniGameShowPoint implements StateBase {
 
         EntityManager.Instance.Update(_dt);
 
+        if(GameSystem.Instance.GetIsPaused()==true)
+        {
+            return;
+        }
         if (TouchManager.Instance.IsDown()) {
 
             ResourceManager.Instance.list.clear();
-//
 //          //Example of touch on screen in the main game to trigger back to Main menu
             StateManager.Instance.ChangeState("Mainmenu");
 

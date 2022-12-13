@@ -32,7 +32,7 @@ public class MainGameSceneState implements StateBase {
         EnitiySmurf.Create();
         Collectables.Create();
         points.Create();
-      //  pause.Create();
+        pause.Create();
         // Example to include another Renderview for Pause Button
     }
 
@@ -52,8 +52,14 @@ public class MainGameSceneState implements StateBase {
     @Override
     public void Update(float _dt) {
 
+
+
         EntityManager.Instance.Update(_dt);
 
+        if(GameSystem.Instance.GetIsPaused()==true)
+        {
+            return;
+        }
         timerT += _dt;
         if (timerT >= 5.0f)
         {
@@ -62,7 +68,7 @@ public class MainGameSceneState implements StateBase {
         }
         if(EnitiySmurf.Instance.getDie())
         {
-            if(Dropper.Instance.GetEndGame()==false && Messagetext.Instance.game1==false)
+            if(Dropper.Instance.GetEndGame()==false)
             {
                 if(ResourceManager.Instance.list.size()==0)
                 {
@@ -76,7 +82,7 @@ public class MainGameSceneState implements StateBase {
 
                 }
             }
-            else  if(Dropper.Instance.GetEndGame()==true || Messagetext.Instance.game1==true && (PlayerM4.Instance.GetEndGame()==false && Messagetext.Instance.game2==false))
+            else  if(Dropper.Instance.GetEndGame()==true)
             {
                 if(ResourceManager.Instance.list.size()==0 )
                 {

@@ -130,6 +130,11 @@ public class Dropper implements EntityBase,Collidable{
         return endGame;
     }
 
+    public void SetEndGame(boolean a)
+    {
+        endGame=a;
+    }
+
     @Override
     public void Update(float _dt) {
 

@@ -50,13 +50,14 @@ public class messageStage implements StateBase {
         EntityManager.Instance.Update(_dt);
         if (TouchManager.Instance.IsDown()) {
 
-            if (Messagetext.Instance.game1 == false) {
-                Messagetext.Instance.game1 = true;
+            if (Dropper.Instance.endGame == false) {
+                Dropper.Instance.endGame = true;
                 StateManager.Instance.ChangeState("MainGame");
             }
-            else if (Messagetext.Instance.game2 == false) {
+            else {
                 Messagetext.Instance.game2 = true;
                 StateManager.Instance.ChangeState("score");
+
             }
 //
 //          //Example of touch on screen in the main game to trigger back to Main menu

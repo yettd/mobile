@@ -20,6 +20,8 @@ public class ResourceManager {
     int Live=3;
     private ResourceManager() {}
 
+    int MustspawnTrash=1;
+
     List<String> list = new ArrayList<String>();
 
     public void Init(SurfaceView _view)

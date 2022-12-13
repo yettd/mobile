@@ -93,6 +93,11 @@ int type;
     public void Update(float _dt) {
         buttonDelay +=_dt;
 
+        if(GameSystem.Instance.GetIsPaused()==true)
+        {
+            return;
+        }
+
         if(LOR==0)
         {
             xPos+=15;
@@ -109,9 +114,9 @@ int type;
                                 Dropper.Instance.GetPosX()+Dropper.Instance.GetR(),
                                 Dropper.Instance.GetPosY()+Dropper.Instance.GetR(),
                                 Dropper.Instance.GetR(),
-                                xPos+bmp.getWidth(),
-                                yPos+bmp.getHeight(),
-                                bmp.getHeight()
+                                xPos+bmp.getWidth()/2,
+                                yPos+bmp.getHeight()/2,
+                                bmp.getWidth()/2
                         ) == true
         )
         {

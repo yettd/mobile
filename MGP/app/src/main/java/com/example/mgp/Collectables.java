@@ -57,6 +57,21 @@ public class Collectables implements EntityBase{
         Random r=new Random();
         type=r.nextInt(4);
 
+        if(ResourceManager.Instance.MustspawnTrash==0)
+        {
+            type=3;
+          //  ResourceManager.Instance.MustspawnTrash=2;
+            ResourceManager.Instance.MustspawnTrash=r.nextInt(4)+1;
+        }
+        else
+        {
+            ResourceManager.Instance.MustspawnTrash--;
+        }
+        if(type==3)
+        {
+            ResourceManager.Instance.MustspawnTrash=r.nextInt(4)+1;
+
+        }
         xPos=screenWidth-150;
 //        yPos=150;
 
@@ -68,13 +83,13 @@ public class Collectables implements EntityBase{
         switch (nxt)
         {
             case 0 :
-                yPos = 450;
+                yPos = 0+bmp.getHeight();
                 break;
             case 1 :
-                yPos=150 / 2;
+                yPos=screenHeight/2;
                 break;
             case 2 :
-                yPos=850;
+                yPos=screenHeight-bmp.getHeight();
                 break;
             default:
                 break;
@@ -85,7 +100,10 @@ public class Collectables implements EntityBase{
     public void Update(float _dt) {
 
         buttonDelay +=_dt;
-
+        if(GameSystem.Instance.GetIsPaused()==true)
+        {
+            return;
+        }
         xPos-=15;
 
         if (

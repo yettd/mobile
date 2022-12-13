@@ -69,6 +69,11 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
 
             textView.setText(stateMap.size() +"");
 
+
+            Dropper.Instance.SetEndGame(false);
+            PlayerM4.Instance.SetEndGame(false);
+
+
             intent.setClass(this, GamePage.class);
 
         }

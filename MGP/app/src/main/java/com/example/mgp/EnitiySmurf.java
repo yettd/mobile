@@ -21,6 +21,7 @@ public class EnitiySmurf implements EntityBase,Collidable{
     private float jumptimer = 0.0f;
     private boolean startJump = false;
     private float maxY = 0;
+    private float q;
 
     private  sprite SpriteSheet=null;
 
@@ -71,11 +72,16 @@ public class EnitiySmurf implements EntityBase,Collidable{
         xPos=150;
         yPos= _view.getHeight() - 150.0f;
         maxY = _view.getHeight() - 150.0f;
+        q = yPos;
     }
 
     @Override
     public void Update(float _dt) {
 
+        if(GameSystem.Instance.GetIsPaused()==true)
+        {
+            return;
+        }
         if(GameSystem.Instance.GetIsPaused())
         {
             return;
@@ -94,7 +100,7 @@ public class EnitiySmurf implements EntityBase,Collidable{
             }
             else
             {
-
+                yPos= q;
                 startJump = false;
                 jumptimer = 0.0f;
             }

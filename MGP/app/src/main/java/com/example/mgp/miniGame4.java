@@ -21,7 +21,7 @@ public class miniGame4 implements StateBase {
         text.Create();
         PlayerM4.Create();
         //Dropper.Create();
-        //pause.Create();
+        pause.Create();
         //test();
         points.Create();
 
@@ -52,6 +52,11 @@ public class miniGame4 implements StateBase {
 
         EntityManager.Instance.Update(_dt);
 
+
+        if(GameSystem.Instance.GetIsPaused()==true)
+        {
+            return;
+        }
         if(TrashSpawn<=0)
         {
 

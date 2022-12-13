@@ -33,10 +33,17 @@ public class RenderBackground implements EntityBase {
     }
 
     public void Update(float _dt){
+        if(GameSystem.Instance.GetIsPaused()==true)
+        {
+            return;
+        }
+        if(StateManager.Instance.GetCurrentState()=="MainGame") {
 
-        xPos -= _dt * 500;
-        if (xPos < -ScreenWidth){
-            xPos = 0;
+
+            xPos -= _dt * 500;
+            if (xPos < -ScreenWidth) {
+                xPos = 0;
+            }
         }
     }
 
