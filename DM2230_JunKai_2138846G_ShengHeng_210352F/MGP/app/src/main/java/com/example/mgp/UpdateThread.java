@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.view.SurfaceHolder;
 
+
 public class UpdateThread extends Thread {
 
     static final long targetFPS = 60;
@@ -27,6 +28,7 @@ public class UpdateThread extends Thread {
         EntityManager.Instance.Init(_view);
         GameSystem.Instance.Init(_view);
         ResourceManager.Instance.Init(_view);
+        AudioManager.Instance.Init(_view);
     }
 
     public boolean IsRunning()
