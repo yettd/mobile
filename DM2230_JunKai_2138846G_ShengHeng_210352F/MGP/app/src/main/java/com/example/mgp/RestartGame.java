@@ -44,7 +44,6 @@ public class RestartGame implements EntityBase{
         pauseImg= BitmapFactory.decodeResource(_view.getResources(),
                 R.drawable.pause1);
         scalebmp = Bitmap.createScaledBitmap(pauseImg, (int) (pauseImg.getWidth() * 0.65f), (int) (pauseImg.getWidth() * 0.65f), true);
-        scalebmpUP = Bitmap.createScaledBitmap(pauseImgUP, (int) (pauseImgUP.getWidth() * 0.65f), (int) (pauseImgUP.getWidth() * 0.65f), true);
 
         xPos=screenHeight/2;
         yPos=screenHeight/2;
@@ -52,33 +51,24 @@ public class RestartGame implements EntityBase{
 
     @Override
     public void Update(float _dt) {
-        if(GameSystem.Instance.GetIsPaused()) {
+        if(GameSystem.Instance.GetIsPaused()==true) {
             buttonDelay += _dt;
 
             if (TouchManager.Instance.HasTouch()) {
-                if (TouchManager.Instance.IsDown() && !isPause) {
                     float imgRadius = scalebmp.getHeight() * 0.5f;
 
                     if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.5) {
-                        isPause = true;
-
-                        if (PauseConfirmDialogFragment.isShown) {
-                            return;
-                        }
-                        PauseConfirmDialogFragment newPause = new PauseConfirmDialogFragment();
-                        newPause.show(GamePage.Instance.getSupportFragmentManager(), "PauseConfrim");
-
+                        RestartConfirmDialogFragment newPause = new RestartConfirmDialogFragment();
+                        newPause.show(GamePage.Instance.getSupportFragmentManager(), "RestartConfrim");
                     }
                     buttonDelay = 0;
-                    GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
-                }
-            } else isPause = false;
+            }
         }
     }
 
     @Override
     public void Render(Canvas _canvas) {
-        if(GameSystem.Instance.GetIsPaused()) {
+        if(GameSystem.Instance.GetIsPaused()==true) {
                 _canvas.drawBitmap(scalebmp, xPos - scalebmp.getWidth() * 0.5f, yPos - scalebmp.getHeight() * 0.5f, null);
 
         }

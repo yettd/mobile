@@ -66,18 +66,26 @@ public class pause implements EntityBase{
 
                 if(Collision.SphereToSphere(TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY(),0.0f,xPos,yPos,imgRadius)&& buttonDelay>=0.5)
                 {
-                    isPause=true;
+                    if(isPause==false) {
 
-                    if(PauseConfirmDialogFragment.isShown)
-                    {
-                        return;
+                        System.out.println("PASDKPSAOIDFKSPOEGF");
+                        isPause = true;
+                        if (PauseConfirmDialogFragment.isShown) {
+                            return;
+                        }
+                        PauseConfirmDialogFragment newPause = new PauseConfirmDialogFragment();
+
+                        newPause.show(GamePage.Instance.getSupportFragmentManager(), "PauseConfrim");
                     }
-                    PauseConfirmDialogFragment newPause=new PauseConfirmDialogFragment();
-                    newPause.show(GamePage.Instance.getSupportFragmentManager(),"PauseConfrim");
+                    else
+                    {
+                        PauseConfirmDialogFragment.isShown=false;
+                          GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
+
+                    }
 
                 }
                 buttonDelay=0;
-                GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
             }
         }
         else isPause=false;

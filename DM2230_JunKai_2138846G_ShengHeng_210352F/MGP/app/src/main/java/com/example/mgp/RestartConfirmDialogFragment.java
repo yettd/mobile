@@ -18,8 +18,9 @@ public class RestartConfirmDialogFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 ResourceManager.Instance.list.clear();
+                GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
 //          //Example of touch on screen in the main game to trigger back to Main menu
-                StateManager.Instance.ChangeState("Mainmenu");
+                StateManager.Instance.ChangeState("score");
 
                 isShown=false;
             }

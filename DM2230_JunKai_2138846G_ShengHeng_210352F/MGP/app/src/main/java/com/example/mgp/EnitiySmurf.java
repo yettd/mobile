@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
 import androidx.appcompat.widget.ResourceManagerInternal;
@@ -24,6 +25,7 @@ public class EnitiySmurf implements EntityBase,Collidable{
     private float maxY = 0;
     private float q;
 
+    int screenWidth,screenHeight;
     private  sprite SpriteSheet=null;
 
     private  boolean die=false;
@@ -68,7 +70,9 @@ public class EnitiySmurf implements EntityBase,Collidable{
         bmp=BitmapFactory.decodeResource(_view.getResources(),R.drawable.smurf_sprite);
         SpriteSheet=new sprite(bmp,4,4,16);
         isInit=true;
-
+        DisplayMetrics metric=_view.getResources().getDisplayMetrics();
+        screenWidth=metric.widthPixels;
+        screenHeight=metric.heightPixels;
         Random getRand=new Random();
         xPos=150;
         yPos= _view.getHeight() - 150.0f;
@@ -78,6 +82,7 @@ public class EnitiySmurf implements EntityBase,Collidable{
 
     @Override
     public void Update(float _dt) {
+
         //Sheng heng
         if(GameSystem.Instance.GetIsPaused()==true)
         {
@@ -90,23 +95,47 @@ public class EnitiySmurf implements EntityBase,Collidable{
 
         if (startJump)
         {
-            AudioManager.Instance.PlayAudio(R.raw.jumpsound,0.9f);
-            jumptimer += _dt ;
-            if (jumptimer < 1.0f)
+            if(!AudioManager.Instance.IsPlaying(R.raw.jumpsound)) {
+               AudioManager.Instance.PlayAudio(R.raw.jumpsound, 0.9f);
+           }
+//            jumptimer += _dt ;
+//            if (jumptimer < 1.0f)
+//            {
+//                yPos -= 20.1f;
+//            }
+//            else if (jumptimer >= 1.0f && jumptimer < 2.0f)
+//            {
+//                yPos += 20.1f;
+//            }
+//            else
+//            {
+//                yPos= q;
+//                startJump = false;
+//                jumptimer = 0.0f;
+//            }
+
+            if(yPos- SpriteSheet.GetHeight() >0 )
             {
-                yPos -= 20.1f;
-            }
-            else if (jumptimer >= 1.0f && jumptimer < 2.0f)
-            {
-                yPos += 20.1f;
+                yPos-=20.1f;
+
+
             }
             else
             {
-                yPos= q;
                 startJump = false;
-                jumptimer = 0.0f;
+            }
+
+        }
+
+        if(startJump==false) {
+            if (yPos + SpriteSheet.GetHeight()/2 < screenHeight) {
+                yPos += 20.1f;
+            } else {
+                //yPos = q;
             }
         }
+
+
         if (yPos > maxY)
         {
             yPos = maxY;

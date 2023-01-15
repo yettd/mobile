@@ -18,6 +18,7 @@ public class PauseConfirmDialogFragment extends DialogFragment {
         builder.setMessage("Confrim Pause?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
                 GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
                 isShown=false;
             }
