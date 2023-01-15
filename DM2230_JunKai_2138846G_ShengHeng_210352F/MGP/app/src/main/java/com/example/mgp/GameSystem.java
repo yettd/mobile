@@ -22,6 +22,7 @@ public class GameSystem {
 
     public void Update(float _deltaTime)
     {
+
     }
 
     public void SaveEditBegin()
