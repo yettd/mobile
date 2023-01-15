@@ -120,6 +120,7 @@ int type;
                         ) == true
         )
         {
+            AudioManager.Instance.PlayAudio(R.raw.coinsound,0.9f);
                 Dropper.Instance.status=false;
                 if(type==Dropper.Instance.type)
                 {

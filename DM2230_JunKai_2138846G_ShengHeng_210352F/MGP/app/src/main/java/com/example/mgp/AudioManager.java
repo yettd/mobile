@@ -24,7 +24,7 @@ public class AudioManager {
         res = _view.getResources();
     }
 
-    public void PlayAudio(int _id)
+    public void PlayAudio(int _id, float _volume)
     {
         if (audioMap.containsKey(_id))
         {

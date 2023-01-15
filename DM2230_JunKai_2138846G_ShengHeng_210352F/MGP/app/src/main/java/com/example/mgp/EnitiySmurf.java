@@ -90,14 +90,15 @@ public class EnitiySmurf implements EntityBase,Collidable{
 
         if (startJump)
         {
+            AudioManager.Instance.PlayAudio(R.raw.jumpsound,0.9f);
             jumptimer += _dt ;
-            if (jumptimer < 0.5f)
+            if (jumptimer < 1.0f)
             {
-                yPos -= 50.1f;
+                yPos -= 20.1f;
             }
-            else if (jumptimer >= 0.5f && jumptimer < 1.0f)
+            else if (jumptimer >= 1.0f && jumptimer < 2.0f)
             {
-                yPos += 50.1f;
+                yPos += 20.1f;
             }
             else
             {

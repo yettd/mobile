@@ -33,6 +33,7 @@ public class MainGameSceneState implements StateBase {
         Collectables.Create();
         points.Create();
         pause.Create();
+        AudioManager.Instance.PlayAudio(R.raw.backgroundsound,0.9f);
         // Example to include another Renderview for Pause Button
     }
 

@@ -121,6 +121,7 @@ public class TrashBinForGame4 implements EntityBase{
                             ) == true
             )
             {
+                AudioManager.Instance.PlayAudio(R.raw.coinsound,0.9f);
                 PlayerM4.Instance.status = false;
                 if (type == Dropper.Instance.type) {
                     ResourceManager.Instance.point++;

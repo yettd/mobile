@@ -120,6 +120,7 @@ public class Collectables implements EntityBase{
                 ) == true
             )
         {
+            AudioManager.Instance.PlayAudio(R.raw.coinsound,0.9f);
             switch (type)
             {
                 case 0 :
