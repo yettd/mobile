@@ -48,6 +48,11 @@ public class fakerLoad extends Activity implements StateBase {
         if(loadTimer<=0)
         {
 
+            AudioManager.Instance.PlayAudio(R.raw.backgroundsound,0.9f);
+            GameSystem.Instance.SaveEditBegin();
+            GameSystem.Instance.SetIntinSave("points",0);
+            GameSystem.Instance.SetIntinSave("lives",3);
+            GameSystem.Instance.SaveEditEnd();
             ResourceManager.Instance.list.clear();
             StateManager.Instance.ChangeState("MainGame");
         }

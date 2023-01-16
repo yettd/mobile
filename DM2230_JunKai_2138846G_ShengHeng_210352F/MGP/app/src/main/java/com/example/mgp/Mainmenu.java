@@ -75,6 +75,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
             ResourceManager.Instance.Live=3;
 
 
+
             intent.setClass(this, GamePage.class);
 
         }

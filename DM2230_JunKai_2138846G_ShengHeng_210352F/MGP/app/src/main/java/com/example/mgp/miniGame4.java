@@ -78,7 +78,7 @@ public class miniGame4 implements StateBase {
         }
 
 //jun kai
-        if (ResourceManager.Instance.Live<=0) {
+        if (GameSystem.Instance.GetIntinSave("lives")<=0) {
 			
             //Example of touch on screen in the main game to trigger back to Main menu
              StateManager.Instance.ChangeState("score");

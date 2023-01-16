@@ -47,8 +47,8 @@ public class pause implements EntityBase{
                 R.drawable.pause);;
         pauseImgUP=BitmapFactory.decodeResource(_view.getResources(),
                 R.drawable.pause1);;
-        scalebmp = Bitmap.createScaledBitmap(pauseImg, (int) (pauseImg.getWidth() * 0.65f), (int) (pauseImg.getWidth() * 0.65f), true);
-        scalebmpUP = Bitmap.createScaledBitmap(pauseImgUP, (int) (pauseImgUP.getWidth() * 0.65f), (int) (pauseImgUP.getWidth() * 0.65f), true);
+        scalebmp = Bitmap.createScaledBitmap(pauseImg, (int) (pauseImg.getWidth() * 0.85f), (int) (pauseImg.getWidth() * 0.85f), true);
+        scalebmpUP = Bitmap.createScaledBitmap(pauseImgUP, (int) (pauseImgUP.getWidth() * 0.85f), (int) (pauseImgUP.getWidth() * 0.85f), true);
 
         xPos=0+scalebmp.getWidth();
         yPos=150;
@@ -57,30 +57,32 @@ public class pause implements EntityBase{
     @Override
     public void Update(float _dt) {
         buttonDelay +=_dt;
-
         if(TouchManager.Instance.HasTouch())
         {
             if (TouchManager.Instance.IsDown() && !isPause)
             {
                 float imgRadius=scalebmp.getHeight()*0.5f;
 
+                System.out.println("X" +TouchManager.Instance.GetPosX() + " Y" + TouchManager.Instance.GetPosY());
+
+                System.out.println("PX" +xPos + " PY" + yPos);
+
                 if(Collision.SphereToSphere(TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY(),0.0f,xPos,yPos,imgRadius)&& buttonDelay>=0.5)
                 {
-                    if(isPause==false) {
+                    if(isPause==true)
+                    {
+                        isPause=false;
+                        xPos=0+scalebmp.getWidth();
+                        yPos=150;
+                        GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
 
-                        System.out.println("PASDKPSAOIDFKSPOEGF");
-                        isPause = true;
-                        if (PauseConfirmDialogFragment.isShown) {
-                            return;
-                        }
-                        PauseConfirmDialogFragment newPause = new PauseConfirmDialogFragment();
-
-                        newPause.show(GamePage.Instance.getSupportFragmentManager(), "PauseConfrim");
                     }
                     else
                     {
-                        PauseConfirmDialogFragment.isShown=false;
-                          GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
+                        isPause=true;
+                        xPos=screenWidth/2+(scalebmp.getWidth()*2);
+                        yPos=screenHeight/2;
+                        GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
 
                     }
 

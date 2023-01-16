@@ -56,17 +56,29 @@ public class points implements EntityBase{
         paint.setStrokeWidth(200);
         paint.setTypeface(myfont);
         paint.setTextSize(70);
+
 //jun kai
         if(StateManager.Instance.GetCurrentState()=="score")
         {
-            _canvas.drawText("Score:"+ResourceManager.Instance.point,ScreenW/2-500,ScreenH/2,paint);
+            int hs= GameSystem.Instance.GetIntinSave("hs");
+            if (hs<GameSystem.Instance.GetIntinSave("points"))
+            {
+                GameSystem.Instance.SaveEditBegin();
+                GameSystem.Instance.SetIntinSave("hs",GameSystem.Instance.GetIntinSave("points"));
+                GameSystem.Instance.SaveEditEnd();
+
+                _canvas.drawText("NEW HIGHSCORE",ScreenW/2-500,ScreenH/4,paint);
+            }
+
+            _canvas.drawText("Score:"+GameSystem.Instance.GetIntinSave("points"),ScreenW/2-500,ScreenH/2,paint);
+            _canvas.drawText("HIGHSCORE:"+GameSystem.Instance.GetIntinSave("hs"),ScreenW/2-500,ScreenH/3,paint);
         }
         else
         {
-            _canvas.drawText("Points: "+ResourceManager.Instance.point,ScreenW-500,80,paint);
+            _canvas.drawText("Points: "+GameSystem.Instance.GetIntinSave("points"),ScreenW-500,80,paint);
             if(StateManager.Instance.GetCurrentState()=="miniGame4"||StateManager.Instance.GetCurrentState()=="miniGame3")
             {
-                _canvas.drawText("Lives:"+ResourceManager.Instance.Live,ScreenW/2,80,paint);
+                _canvas.drawText("Lives:"+GameSystem.Instance.GetIntinSave("lives"),ScreenW/2,80,paint);
             }
         }
     }

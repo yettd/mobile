@@ -47,6 +47,7 @@ public class Collectables implements EntityBase{
         screenWidth=metric.widthPixels;
         screenHeight=metric.heightPixels;
 
+        xPos=screenWidth-150;
         bmp=ResourceManager.Instance.GetBitmap(R.drawable.paper);
         bins[0]=bmp;
         bmp=ResourceManager.Instance.GetBitmap(R.drawable.platic);
@@ -74,7 +75,6 @@ public class Collectables implements EntityBase{
             ResourceManager.Instance.MustspawnTrash=r.nextInt(4)+1;
 
         }
-        xPos=screenWidth-150;
 //        yPos=150;
 
         OneAtATime = true;

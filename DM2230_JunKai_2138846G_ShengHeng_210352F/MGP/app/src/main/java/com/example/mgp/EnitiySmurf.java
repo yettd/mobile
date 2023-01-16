@@ -24,6 +24,7 @@ public class EnitiySmurf implements EntityBase,Collidable{
     private boolean startJump = false;
     private float maxY = 0;
     private float q;
+    int jump=0;
 
     int screenWidth,screenHeight;
     private  sprite SpriteSheet=null;
@@ -93,7 +94,7 @@ public class EnitiySmurf implements EntityBase,Collidable{
             return;
         }
 
-        if (startJump)
+        if (jump==1)
         {
             if(!AudioManager.Instance.IsPlaying(R.raw.jumpsound)) {
                AudioManager.Instance.PlayAudio(R.raw.jumpsound, 0.9f);
@@ -122,16 +123,17 @@ public class EnitiySmurf implements EntityBase,Collidable{
             }
             else
             {
-                startJump = false;
+                jump=2;
             }
 
         }
 
-        if(startJump==false) {
+        if(jump==2) {
             if (yPos + SpriteSheet.GetHeight()/2 < screenHeight) {
                 yPos += 20.1f;
             } else {
                 //yPos = q;
+                jump=0;
             }
         }
 
@@ -140,10 +142,10 @@ public class EnitiySmurf implements EntityBase,Collidable{
         {
             yPos = maxY;
         }
-        if(TouchManager.Instance.HasTouch())
+        if(TouchManager.Instance.HasTouch() && jump==0)
         {
             startJump = true;
-
+            jump=1;
            float imgRadius=SpriteSheet.GetWidth()*5.0f;
 
 

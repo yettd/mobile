@@ -42,10 +42,10 @@ public class RestartGame implements EntityBase{
         screenHeight=metric.heightPixels;
 
         pauseImg= BitmapFactory.decodeResource(_view.getResources(),
-                R.drawable.pause1);
-        scalebmp = Bitmap.createScaledBitmap(pauseImg, (int) (pauseImg.getWidth() * 0.65f), (int) (pauseImg.getWidth() * 0.65f), true);
+                R.drawable.restart);
+        scalebmp = Bitmap.createScaledBitmap(pauseImg, (int) (pauseImg.getWidth() * 0.85f), (int) (pauseImg.getWidth() * 0.85f), true);
 
-        xPos=screenHeight/2;
+        xPos=screenWidth/3;
         yPos=screenHeight/2;
     }
 

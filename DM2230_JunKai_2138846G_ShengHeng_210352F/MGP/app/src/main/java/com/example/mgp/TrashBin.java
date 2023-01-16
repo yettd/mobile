@@ -100,12 +100,12 @@ int type;
 
         if(LOR==0)
         {
-            xPos+=15;
+            xPos+=10;
 
         }
         else if(LOR==1)
         {
-            xPos-=15;
+            xPos-=10;
         }
 
         if (
@@ -124,7 +124,12 @@ int type;
                 Dropper.Instance.status=false;
                 if(type==Dropper.Instance.type)
                 {
-                    ResourceManager.Instance.point++;
+                    int p =GameSystem.Instance.GetIntinSave("points");
+                    p++;
+                    GameSystem.Instance.SaveEditBegin();
+
+                    GameSystem.Instance.SetIntinSave("points",p);
+                    GameSystem.Instance.SaveEditEnd();
                 }
                 else
                 {

@@ -49,7 +49,7 @@ public class GameSystem {
 
     public int GetIntinSave(String _key)
     {
-        return sharedPreferences.getInt(_key, 10); //<---- 10 is temp number that I place for test use
+        return sharedPreferences.getInt(_key, 0); //<---- 10 is temp number that I place for test use
     }
 
     public void Init(SurfaceView _view)

@@ -34,7 +34,6 @@ public class MainGameSceneState implements StateBase {
         points.Create();
         pause.Create();
         RestartGame.Create();
-      //  AudioManager.Instance.PlayAudio(R.raw.backgroundsound,0.9f);
         // Example to include another Renderview for Pause Button
     }
 
@@ -64,7 +63,7 @@ public class MainGameSceneState implements StateBase {
             return;
         }
         timerT += _dt;
-        if (timerT >= 5.0f)
+        if (timerT >= 3.0f)
         {
             Collectables.Create();
             timerT = 0.0f;
