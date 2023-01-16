@@ -32,8 +32,9 @@ public class MainGameSceneState implements StateBase {
         EnitiySmurf.Create();
         Collectables.Create();
         points.Create();
-        pause.Create();
+
         RestartGame.Create();
+        pause.Create();
         // Example to include another Renderview for Pause Button
     }
 

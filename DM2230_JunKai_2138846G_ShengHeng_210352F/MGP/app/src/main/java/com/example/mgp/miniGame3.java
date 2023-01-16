@@ -19,10 +19,11 @@ public class miniGame3 implements StateBase {
         RenderBackground.Create();
         text.Create();
         Dropper.Create();
-        pause.Create();
+
         test();
         points.Create();
-
+        RestartGame.Create();
+        pause.Create();
         // Example to include another Renderview for Pause Button
     }
 

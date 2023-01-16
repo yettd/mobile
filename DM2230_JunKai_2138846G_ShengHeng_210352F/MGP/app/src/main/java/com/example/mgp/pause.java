@@ -72,16 +72,14 @@ public class pause implements EntityBase{
                     if(isPause==true)
                     {
                         isPause=false;
-                        xPos=0+scalebmp.getWidth();
-                        yPos=150;
-                        GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
 
+                        GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
+                        System.out.println("sadasdas");
                     }
                     else
                     {
                         isPause=true;
-                        xPos=screenWidth/2+(scalebmp.getWidth()*2);
-                        yPos=screenHeight/2;
+
                         GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
 
                     }
@@ -90,7 +88,22 @@ public class pause implements EntityBase{
                 buttonDelay=0;
             }
         }
-        else isPause=false;
+        else
+        {
+
+            isPause=false;
+        }
+
+        if(GameSystem.Instance.GetIsPaused())
+        {
+            xPos=screenWidth/2+(scalebmp.getWidth());
+            yPos=screenHeight/2;
+        }
+        else
+        {
+            xPos=0+scalebmp.getWidth();
+            yPos=150;
+        }
     }
 
     @Override

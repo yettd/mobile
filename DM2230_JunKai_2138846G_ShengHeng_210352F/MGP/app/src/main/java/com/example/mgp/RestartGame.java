@@ -3,6 +3,7 @@ package com.example.mgp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
@@ -69,7 +70,15 @@ public class RestartGame implements EntityBase{
     @Override
     public void Render(Canvas _canvas) {
         if(GameSystem.Instance.GetIsPaused()==true) {
-                _canvas.drawBitmap(scalebmp, xPos - scalebmp.getWidth() * 0.5f, yPos - scalebmp.getHeight() * 0.5f, null);
+            Paint paint= new Paint();
+            paint.setARGB(255,255,204,0);
+            _canvas.drawRect(xPos-100,screenHeight/3,screenWidth/2+(scalebmp.getWidth())+100,screenHeight/2f+scalebmp.getHeight()+50,paint);
+
+            _canvas.drawBitmap(scalebmp, xPos - scalebmp.getWidth() * 0.5f, yPos - scalebmp.getHeight() * 0.5f, null);
+
+
+
+
 
         }
     }

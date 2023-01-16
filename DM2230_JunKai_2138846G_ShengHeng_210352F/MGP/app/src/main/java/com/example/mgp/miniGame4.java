@@ -21,10 +21,12 @@ public class miniGame4 implements StateBase {
         text.Create();
         PlayerM4.Create();
         //Dropper.Create();
-        pause.Create();
+
         //test();
         points.Create();
 
+        RestartGame.Create();
+        pause.Create();
         // Example to include another Renderview for Pause Button
     }
 
