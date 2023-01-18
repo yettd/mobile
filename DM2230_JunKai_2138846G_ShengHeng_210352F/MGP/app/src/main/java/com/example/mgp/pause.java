@@ -63,16 +63,11 @@ public class pause implements EntityBase{
             {
                 float imgRadius=scalebmp.getHeight()*0.5f;
 
-                System.out.println("X" +TouchManager.Instance.GetPosX() + " Y" + TouchManager.Instance.GetPosY());
-
-                System.out.println("PX" +xPos + " PY" + yPos);
-
                 if(Collision.SphereToSphere(TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY(),0.0f,xPos,yPos,imgRadius)&& buttonDelay>=0.5)
                 {
                     if(isPause==true)
                     {
                         isPause=false;
-
                         GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
                         System.out.println("sadasdas");
                     }
@@ -98,11 +93,20 @@ public class pause implements EntityBase{
         {
             xPos=screenWidth/2+(scalebmp.getWidth());
             yPos=screenHeight/2;
+            if(AudioManager.Instance.IsPlaying(R.raw.backgroundsound))
+            {
+                AudioManager.Instance.pauseA(R.raw.backgroundsound);
+
+            }
+
         }
         else
         {
             xPos=0+scalebmp.getWidth();
             yPos=150;
+            if(!AudioManager.Instance.IsPlaying(R.raw.backgroundsound)) {
+                AudioManager.Instance.ResumeA(R.raw.backgroundsound);
+            }
         }
     }
 

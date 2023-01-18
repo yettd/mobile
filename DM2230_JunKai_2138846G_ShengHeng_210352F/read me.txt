@@ -38,11 +38,13 @@ Sheng heng:
 Player movement for the runner part of the game
 Spawning of the different material
 Collecting data of the material collected
+Audio
 
 Jun Kai
 The two mini games
-Point
 Message state for no material to play minigame
 pause
+dialogAlret
+Score
 
 
