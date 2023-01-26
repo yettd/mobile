@@ -1,22 +1,22 @@
 package com.example.mgp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Canvas;
+import android.os.Bundle;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.content.Intent;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
 // Created by TanSiewLan2021
 
-public class Mainmenu extends Activity implements OnClickListener, StateBase {  //Using StateBase class
+public class GameChoser extends Activity implements OnClickListener, StateBase {  //Using StateBase class
 
     //Define buttons
     private Button btn_start;
@@ -37,7 +37,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
        // setContentView(new GameView(this)); // Surfaceview = GameView
-        setContentView(R.layout.mainmenu);
+        setContentView(R.layout.gamechoser);
         btn_start = (Button)findViewById(R.id.btn_start);
         btn_start.setOnClickListener(this); //Set Listener to this button --> Start Button
 
@@ -46,7 +46,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
         btn_LB = (Button)findViewById(R.id.btn_LB);
         btn_LB.setOnClickListener(this); //Set Listener to this button --> Back Button
 
-		  StateManager.Instance.AddState(new Mainmenu());
+		  StateManager.Instance.AddState(new GameChoser());
     }
 
     @Override
@@ -64,33 +64,29 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
             // intent --> to set to another class which another page or screen that we are launching.
             ResourceManager.Instance.state=0;
             StateManager.Instance.ChangeState("faker"); // Default is like a loading page
-
-
-
-
-
-
-
             Dropper.Instance.SetEndGame(false);
             PlayerM4.Instance.SetEndGame(false);
-            ResourceManager.Instance.Live=3;
-            intent.setClass(this, GameChoser.class);
+            intent.setClass(this, GamePage.class);
 
         }
        else if (v == btn_LB)
         {
             // intent --> to set to another class which another page or screen that we are launching.
-            ResourceManager.Instance.state=1;
-           // StateManager.Instance.ChangeState("faker"); // Default is like a loading page
-
+            ResourceManager.Instance.state=3;
+            StateManager.Instance.ChangeState("faker"); // Default is like a loading page
+            Dropper.Instance.SetEndGame(false);
+            PlayerM4.Instance.SetEndGame(false);
             intent.setClass(this, GamePage.class);
 
         }
-
-
         else if (v == btn_option)
         {
-            intent.setClass(this, option.class);
+            // intent --> to set to another class which another page or screen that we are launching.
+            ResourceManager.Instance.state=2;
+            StateManager.Instance.ChangeState("faker"); // Default is like a loading page
+            Dropper.Instance.SetEndGame(false);
+            PlayerM4.Instance.SetEndGame(false);
+            intent.setClass(this, GamePage.class);
         }
         startActivity(intent);
 
@@ -114,7 +110,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
 	
     @Override
     public String GetName() {
-        return "Mainmenu";
+        return "GC";
     }
 
     @Override

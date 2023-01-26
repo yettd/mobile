@@ -70,30 +70,53 @@ public class miniGame3 implements StateBase {
 //jun kai
         if(Dropper.Instance.GetOut())
         {
-            ResourceManager.Instance.Live--;
+            int p = GameSystem.Instance.GetIntinSave("lives");
+            p--;
+            GameSystem.Instance.SaveEditBegin();
+
+            GameSystem.Instance.SetIntinSave("lives", p);
+            GameSystem.Instance.SaveEditEnd();
             Dropper.Instance.Reset();
         }
 
 //jun kai
         if (GameSystem.Instance.GetIntinSave("lives")<=0) {
-			
-            //Example of touch on screen in the main game to trigger back to Main menu
-             StateManager.Instance.ChangeState("MainGame");
+
+            if(ResourceManager.Instance.state==0) {
+                //Example of touch on screen in the main game to trigger back to Main menu
+                StateManager.Instance.ChangeState("MainGame");
+            }
+            else
+            {
+                StateManager.Instance.ChangeState("score");
+            }
              Dropper.Instance.endGame=true;
             Messagetext.Instance.game1=true;
             ResourceManager.Instance.list.clear();
-            ResourceManager.Instance.Live=3;
+            GameSystem.Instance.SaveEditBegin();
+
+            GameSystem.Instance.SetIntinSave("lives", 3);
+            GameSystem.Instance.SaveEditEnd();
         }
 
 //jun kai
         if(Dropper.Instance.GetEndGame())
         {
-            StateManager.Instance.ChangeState("MainGame");
+            if(ResourceManager.Instance.state==0) {
+                //Example of touch on screen in the main game to trigger back to Main menu
+                StateManager.Instance.ChangeState("MainGame");
+            }
+            else
+            {
+                StateManager.Instance.ChangeState("score");
+            }
             Dropper.Instance.endGame=true;
-
             Messagetext.Instance.game1=true;
             ResourceManager.Instance.list.clear();
-            ResourceManager.Instance.Live=3;
+            GameSystem.Instance.SaveEditBegin();
+
+            GameSystem.Instance.SetIntinSave("lives", 3);
+            GameSystem.Instance.SaveEditEnd();
         }
     }
 }

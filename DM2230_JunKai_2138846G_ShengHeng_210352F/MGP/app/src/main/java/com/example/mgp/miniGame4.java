@@ -32,7 +32,7 @@ public class miniGame4 implements StateBase {
 
     void test()
     {
-        TrashBin.Create();
+        TrashBinForGame4.Create();
     }
 
     @Override
@@ -49,6 +49,7 @@ public class miniGame4 implements StateBase {
 
     }
 
+
     @Override
     public void Update(float _dt) {
 
@@ -63,33 +64,27 @@ public class miniGame4 implements StateBase {
         if(TrashSpawn<=0)
         {
 
-           TrashBinForGame4.Create();
-            TrashSpawn=10;
+            test();
+            TrashSpawn=2;
         }
         else
         {
             TrashSpawn-=_dt;
         }
 
-
 //jun kai
-        if(PlayerM4.Instance.GetOut())
-        {
-            ResourceManager.Instance.Live--;
-            PlayerM4.Instance.Reset();
-        }
 
 //jun kai
         if (GameSystem.Instance.GetIntinSave("lives")<=0) {
-			
+
             //Example of touch on screen in the main game to trigger back to Main menu
              StateManager.Instance.ChangeState("score");
              PlayerM4.Instance.endGame=true;
-            Messagetext.Instance.game2=true;
+             Messagetext.Instance.game2=true;
 
-            ResourceManager.Instance.list.clear();
+             ResourceManager.Instance.list.clear();
         }
-        //jun kai
+//        //jun kai
         if(PlayerM4.Instance.GetEndGame())
         {
             StateManager.Instance.ChangeState("score");

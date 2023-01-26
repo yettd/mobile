@@ -89,10 +89,6 @@ public class EnitiySmurf implements EntityBase,Collidable{
         {
             return;
         }
-        if(GameSystem.Instance.GetIsPaused())
-        {
-            return;
-        }
 
         if (jump==1)
         {

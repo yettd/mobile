@@ -13,7 +13,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="167dp"
         android:layout_marginRight="62dp"
-        android:text="start"
+        android:text="MainGame"
         android:textSize="40dp" />
 
     <Button
@@ -24,7 +24,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="240dp"
         android:layout_marginRight="61dp"
-        android:text="option"
+        android:text="Droper"
         android:textSize="40dp" />
 
     <Button
@@ -35,7 +35,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="326dp"
         android:layout_marginRight="60dp"
-        android:text="Leaderboard"
+        android:text="Server"
         android:textSize="40dp" />
 
 </RelativeLayout>

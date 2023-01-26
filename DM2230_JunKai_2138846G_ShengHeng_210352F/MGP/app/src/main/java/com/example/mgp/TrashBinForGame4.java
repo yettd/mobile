@@ -26,7 +26,7 @@ public class TrashBinForGame4 implements EntityBase{
     boolean status=true;
     int LOR;
     int type;
-    float timer=10;
+    float timer=3;
     private  Bitmap[] bins={null,null,null};
     @Override
     public boolean IsDone() {
@@ -56,36 +56,67 @@ public class TrashBinForGame4 implements EntityBase{
         bins[2]=bmp;
 
         Random r=new Random();
+        while (true) {
+            if(ResourceManager.Instance.state!=0)
+            {
+                break;
+            }
+
+            type = r.nextInt(3);
+            if(ResourceManager.Instance.list.size()==0)
+            {
+                break;
+            }
+            if(type==0)
+            {
+               if(!ResourceManager.Instance.list.contains("paper"))
+               {
+                   System.out.println("NO PAPAER");
+                   continue;
+               }
+            }
+
+            else if(type==1)
+            {
+                if(!ResourceManager.Instance.list.contains("platic"))
+                {
+                    System.out.println("NO plastic");
+
+                    continue;
+                }
+            }
+
+           else  if(type==2)
+            {
+                if(!ResourceManager.Instance.list.contains("metal"))
+                {
+                    System.out.println("NO metal");
+
+                    continue;
+                }
+            }
 
 
-        type=r.nextInt(3);
+            break;
+        }
 
-        int nxt=r.nextInt(2);
+        int nxt=r.nextInt(3);
 
         switch (nxt)
         {
             case 0 :
-                yPos=(screenHeight-bmp.getHeight()) / 2;
+                yPos=(screenHeight) / 2;
                 break;
             case 1 :
                 yPos=screenHeight-bmp.getHeight();
                 break;
+            case 2 :
+                yPos=0+bmp.getHeight();
+                break;
             default:
                 break;
         }
-        LOR=r.nextInt(2);
 
-        switch (LOR)
-        {
-            case 0 :
-                xPos=screenWidth/2-bmp.getWidth();
-                break;
-            case 1 :
-                xPos=screenWidth-bmp.getWidth();
-                break;
-            default:
-                break;
-        }
 
 
       //  xPos=(screenWidth/2)-(bmp.getWidth()/2);
@@ -105,37 +136,49 @@ public class TrashBinForGame4 implements EntityBase{
         }
         else
         {
-            status=false;
+            xPos+=bmp.getWidth()*2;
+            timer=2;
         }
 
         if(status) {
-            if (
-                    Collision.SphereToSphere
-                            (
-                                    Dropper.Instance.GetPosX()+Dropper.Instance.GetR(),
-                                    Dropper.Instance.GetPosY()+Dropper.Instance.GetR(),
-                                    Dropper.Instance.GetR(),
-                                    xPos+bmp.getWidth()/2,
-                                    yPos+bmp.getHeight()/2,
-                                    bmp.getWidth()/2
-                            ) == true
-            )
-            {
-                AudioManager.Instance.PlayAudio(R.raw.coinsound,0.9f);
-                PlayerM4.Instance.status = false;
-                if (type == Dropper.Instance.type) {
-                    ResourceManager.Instance.point++;
-                }
-                else
-                {
-                    PlayerM4.Instance.SetGetOut(true);
-                    return;
-                }
-                PlayerM4.Instance.Reset();
+            for (int i = 0; i < PlayerM4.Instance.ShotBMP.size(); i++) {
+                if( PlayerM4.Instance.ShotBMP.get(i)!=null) {
+                    if (
+                            Collision.SphereToSphere
+                                    (
+                                            PlayerM4.Instance.ShotPos.get(i).get(0),
+                                            PlayerM4.Instance.ShotPos.get(i).get(1),
+                                            PlayerM4.Instance.ShotBMP.get(i).getHeight()/2,
+                                            xPos + bmp.getWidth() / 2,
+                                            yPos + bmp.getHeight() / 2,
+                                            bmp.getWidth() / 2
+                                    ) == true
+                    ) {
+                        AudioManager.Instance.PlayAudio(R.raw.coinsound, 0.9f);
+                        status = false;
+                        PlayerM4.Instance.ShotBMP.set(i,null);
+                        if (type == PlayerM4.Instance.ShotPos.get(i).get(2)) {
+                            int p = GameSystem.Instance.GetIntinSave("points");
+                            p++;
+                            GameSystem.Instance.SaveEditBegin();
 
+                            GameSystem.Instance.SetIntinSave("points", p);
+                            GameSystem.Instance.SaveEditEnd();
+                        } else {
+                            int p = GameSystem.Instance.GetIntinSave("lives");
+                            p--;
+                            GameSystem.Instance.SaveEditBegin();
+
+                            GameSystem.Instance.SetIntinSave("lives", p);
+                            GameSystem.Instance.SaveEditEnd();
+                            return;
+                        }
+                        PlayerM4.Instance.Reset();
+
+                    }
+                }
             }
         }
-
     }
 
     @Override

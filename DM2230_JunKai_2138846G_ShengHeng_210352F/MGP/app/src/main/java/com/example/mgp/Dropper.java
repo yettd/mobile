@@ -31,7 +31,7 @@ public class Dropper implements EntityBase,Collidable{
     private int  screenHeight;
 
     boolean status=true;
-
+    Random r=new Random();
     boolean endGame;
     float live=3;
 
@@ -101,25 +101,28 @@ public class Dropper implements EntityBase,Collidable{
         Scalebmp=Bitmap.createScaledBitmap(bmp,screenWidth,screenHeight,true);
         asd[2]=bmp;
 
-        if(list==ResourceManager.Instance.list.size())
-        {
-            endGame=true;
-        }
 
-        if(ResourceManager.Instance.list.get(list)=="paper")
-        {
-            bmp=asd[0];
-            type=0;
+        if(ResourceManager.Instance.state==0) {
+            if(list==ResourceManager.Instance.list.size())
+            {
+                endGame=true;
+            }
+            if (ResourceManager.Instance.list.get(list) == "paper") {
+                bmp = asd[0];
+                type = 0;
+            } else if (ResourceManager.Instance.list.get(list) == "platic") {
+                bmp = asd[1];
+                type = 1;
+            } else if (ResourceManager.Instance.list.get(list) == "metal") {
+                bmp = asd[2];
+                type = 2;
+            }
         }
-        else if(ResourceManager.Instance.list.get(list)=="platic")
+        else
         {
-            bmp=asd[1];
-            type=1;
-        }
-        else if(ResourceManager.Instance.list.get(list)=="metal")
-        {
-            bmp=asd[2];
-            type=2;
+            int a=r.nextInt(3);
+            type = a;
+            bmp = asd[a];
         }
         xPos=(screenWidth/2)-(bmp.getWidth()/2);
         yPos=0;
@@ -168,22 +171,31 @@ public class Dropper implements EntityBase,Collidable{
        OutOfScreen=false;
        list++;
         status=true;
-       if(list==ResourceManager.Instance.list.size())
-       {
-            endGame=true;
-       }
+        if(ResourceManager.Instance.state==0) {
+            if (list == ResourceManager.Instance.list.size()) {
+                endGame = true;
+                list = 0;
+            }
+        }
         if(endGame==false) {
 
-
-            if (ResourceManager.Instance.list.get(list) == "paper") {
-                type=0;
-                bmp = asd[0];
-            } else if (ResourceManager.Instance.list.get(list) == "platic") {
-                type=1;
-                bmp = asd[1];
-            } else if (ResourceManager.Instance.list.get(list) == "metal") {
-                type=2;
-                bmp = asd[2];
+            if(ResourceManager.Instance.state==0) {
+                if (ResourceManager.Instance.list.get(list) == "paper") {
+                    type = 0;
+                    bmp = asd[0];
+                } else if (ResourceManager.Instance.list.get(list) == "platic") {
+                    type = 1;
+                    bmp = asd[1];
+                } else if (ResourceManager.Instance.list.get(list) == "metal") {
+                    type = 2;
+                    bmp = asd[2];
+                }
+            }
+            else
+            {
+                int a=r.nextInt(3);
+                type = a;
+                bmp = asd[a];
             }
 
             xPos = (screenWidth / 2) - (bmp.getWidth() / 2);

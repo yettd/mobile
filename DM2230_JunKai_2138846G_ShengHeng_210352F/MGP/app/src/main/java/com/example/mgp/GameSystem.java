@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.SurfaceView;
 
+import java.util.Arrays;
+import java.util.Set;
+
 // Created by TanSiewLan2021
 
 public class GameSystem {
@@ -14,6 +17,9 @@ public class GameSystem {
     private boolean isPaused = false;
     SharedPreferences sharedPreferences = null;
     SharedPreferences.Editor editor = null;
+
+
+
 
     // Singleton Pattern : Blocks others from creating
     private GameSystem()
@@ -46,6 +52,18 @@ public class GameSystem {
             return;
         editor.putInt(_key, value);
     }
+    public void SetString(String _key, String value)
+    {
+        if (editor == null)
+            return;
+        editor.putString(_key, value);
+    }
+    public String GetString(String _key)
+    {
+        return sharedPreferences.getString(_key, null); //<---- 10 is temp number that I place for test use
+    }
+
+
 
     public int GetIntinSave(String _key)
     {
@@ -64,6 +82,7 @@ public class GameSystem {
         StateManager.Instance.AddState(new miniGame4());
         StateManager.Instance.AddState(new messageStage());
         StateManager.Instance.AddState(new miniGameShowPoint());
+        StateManager.Instance.AddState(new Leaderboard());
 
     }
 
