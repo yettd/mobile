@@ -30,7 +30,6 @@ public class fakerLoad extends Activity implements StateBase {
     public void OnExit() {
         EntityManager.Instance.Clean();
 
-        System.out.println(loadTimer);
     }
 
     @Override
@@ -42,11 +41,12 @@ public class fakerLoad extends Activity implements StateBase {
 
     @Override
     public void Update(float _dt) {
-
+        System.out.println("Test");
         EntityManager.Instance.Update(_dt);
         loadTimer-=_dt;
         if(loadTimer<=0)
         {
+            loadTimer=0.1f;
             if(ResourceManager.Instance.state==0)
             {
             AudioManager.Instance.PlayAudio(R.raw.backgroundsound,0.9f);

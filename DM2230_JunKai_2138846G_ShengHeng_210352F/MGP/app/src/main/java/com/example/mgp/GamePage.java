@@ -4,6 +4,7 @@ package com.example.mgp;
 // Create a GamePage is an activity class used to hold the GameView which will have a surfaceview
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.Window;
@@ -25,7 +26,7 @@ public class GamePage extends FragmentActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);  // Hide topbar
 
         Instance = this;
-
+        System.out.println("dasdasd");
         setContentView(new GameView(this)); // Surfaceview = GameView
     }
 
@@ -39,6 +40,15 @@ public class GamePage extends FragmentActivity {
         TouchManager.Instance.Update(x, y, event.getAction());
 
         return true;
+    }
+
+    public  void test()
+    {
+        Intent intent=new Intent();
+        intent.setClass(this, Mainmenu.class);
+        startActivity(intent);
+        GamePage.Instance.finish();
+
     }
 
 }

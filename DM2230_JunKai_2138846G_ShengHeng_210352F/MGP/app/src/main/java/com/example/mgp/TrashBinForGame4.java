@@ -57,12 +57,13 @@ public class TrashBinForGame4 implements EntityBase{
 
         Random r=new Random();
         while (true) {
+            type = r.nextInt(3);
             if(ResourceManager.Instance.state!=0)
             {
                 break;
             }
 
-            type = r.nextInt(3);
+
             if(ResourceManager.Instance.list.size()==0)
             {
                 break;
@@ -130,6 +131,10 @@ public class TrashBinForGame4 implements EntityBase{
             return;
         }
 
+        if(!status)
+        {
+            return;
+        }
         if(timer>0)
         {
             timer-=_dt;
@@ -139,6 +144,19 @@ public class TrashBinForGame4 implements EntityBase{
             xPos+=bmp.getWidth()*2;
             timer=2;
         }
+
+
+        if(xPos>=screenWidth)
+        {
+            status=false;
+            int p = GameSystem.Instance.GetIntinSave("lives");
+            p--;
+            GameSystem.Instance.SaveEditBegin();
+
+            GameSystem.Instance.SetIntinSave("lives", p);
+            GameSystem.Instance.SaveEditEnd();
+        }
+
 
         if(status) {
             for (int i = 0; i < PlayerM4.Instance.ShotBMP.size(); i++) {

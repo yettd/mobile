@@ -62,18 +62,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
         if (v == btn_start)
         {
             // intent --> to set to another class which another page or screen that we are launching.
-            ResourceManager.Instance.state=0;
-            StateManager.Instance.ChangeState("faker"); // Default is like a loading page
 
-
-
-
-
-
-
-            Dropper.Instance.SetEndGame(false);
-            PlayerM4.Instance.SetEndGame(false);
-            ResourceManager.Instance.Live=3;
             intent.setClass(this, GameChoser.class);
 
         }
@@ -81,7 +70,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
         {
             // intent --> to set to another class which another page or screen that we are launching.
             ResourceManager.Instance.state=1;
-           // StateManager.Instance.ChangeState("faker"); // Default is like a loading page
+            StateManager.Instance.ChangeState("faker"); // Default is like a loading page
 
             intent.setClass(this, GamePage.class);
 

@@ -37,7 +37,7 @@ public class miniGameShowPoint implements StateBase {
     public void OnExit() {
         EntityManager.Instance.Clean();
 
-        GamePage.Instance.finish();
+      GamePage.Instance.test();
     }
 
     @Override

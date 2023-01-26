@@ -52,7 +52,6 @@ public class ResourceManager {
             String test=g.toJson(OverAllName);
             GameSystem.Instance.SaveEditBegin();
             GameSystem.Instance.SetString("OAS",test);
-
             GameSystem.Instance.SetString("MG2",test);
             GameSystem.Instance.SetString("MG3",test);
             GameSystem.Instance.SaveEditEnd();
@@ -97,5 +96,9 @@ public class ResourceManager {
         String test=GameSystem.Instance.GetString("OAS");
         java.lang.reflect.Type type = new TypeToken< ArrayList<ArrayList<String>> >() {}.getType();
         OverAllName= g.fromJson(test,type);
+        test=GameSystem.Instance.GetString("MG2");
+        MG2= g.fromJson(test,type);
+        test=GameSystem.Instance.GetString("MG3");
+        MG3= g.fromJson(test,type);
     }
 }

@@ -20,7 +20,18 @@ public class GetNameDialog extends DialogFragment {
     @Override
         public Dialog onCreateDialog(Bundle savedInstanceState)
     {
-        OverAllScore=ResourceManager.Instance.getOAS();
+        if(ResourceManager.Instance.state==0) {
+            OverAllScore = ResourceManager.Instance.getOAS();
+        }
+        else if(ResourceManager.Instance.state==2)
+        {
+            OverAllScore = ResourceManager.Instance.getMG2();
+        }
+        else if(ResourceManager.Instance.state==3)
+        {
+            OverAllScore = ResourceManager.Instance.getMG3();
+        }
+
         isShown=true;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         input = new EditText(getActivity());
@@ -29,16 +40,23 @@ public class GetNameDialog extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                String name=input.getText().toString();
+                String name = input.getText().toString();
 
-                OverAllScore.get(ResourceManager.Instance.Place).set(0,name);
-                Gson g=new Gson();
-                String t=g.toJson(OverAllScore);
+                OverAllScore.get(ResourceManager.Instance.Place).set(0, name);
+                Gson g = new Gson();
+                String t = g.toJson(OverAllScore);
                 GameSystem.Instance.SaveEditBegin();
-                GameSystem.Instance.SetString("OAS",t);
+                if (ResourceManager.Instance.state == 0) {
+                    GameSystem.Instance.SetString("OAS", t);
+                } else if (ResourceManager.Instance.state == 2) {
+                    GameSystem.Instance.SetString("MG2", t);
+                } else if (ResourceManager.Instance.state == 3) {
+                    GameSystem.Instance.SetString("MG3", t);
+                }
                 GameSystem.Instance.SaveEditEnd();
                 ResourceManager.Instance.SetOAS();
-                isShown=false;
+                isShown = false;
+
             }
         });
         return builder.create();

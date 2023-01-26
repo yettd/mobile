@@ -41,6 +41,7 @@ public class PlayerM4 implements EntityBase,Collidable{
     private float xDiff;
     private  float yDiff;
     private  float timerJump;
+    private  float deleteTimer=5;
     float type;
     private  int[] Lane={0,0,0};
     int currlane=2;
@@ -158,90 +159,83 @@ public class PlayerM4 implements EntityBase,Collidable{
 
         if(!TouchManager.Instance.HasTouch() )
         {
+            float diffY=YSP-FYSP;
+            float diffX=XSP-FXSP;
+            if(diffX<=0)
+            {
+                diffX*=-1;
+            }
+            if(diffY<=0) {
+                diffY *= -1;
+            }
+
             if(YSP==-1)
             {
 
             }
             else
             {
-                if(YSP>FYSP)
-                {
-                    if(currlane==0)
-                    {
+                if(diffY>diffX) {
+                    if (YSP + 100 > FYSP) {
+                        if (currlane == 0) {
 
-                    }
-                    else
-                    {
-                        currlane--;
+                        } else {
+                            currlane--;
 
-                    }
-                }
-                else
-                {
-                    if(currlane==2)
-                    {
-
-                    }
-                    else
-                    {
-                        currlane++;
-                    }
-                }
-                if(XSP<FXSP)
-                {            System.out.println("TAKING");
-
-                    if(holding==null) {
-                        if (currlane == 0 && asd[0]!=null) {
-                            holding=ResourceManager.Instance.GetBitmap(R.drawable.paper);
-                            for(int i = 0; i<ResourceManager.Instance.list.size();i++)
-                            {
-                                if(ResourceManager.Instance.list.get(i)=="paper")
-                                {
-                                    ResourceManager.Instance.list.remove(i);
-                                }
-                            }
-                            type=0;
                         }
-                        else if (currlane == 1&& asd[1]!=null){
-                            holding=ResourceManager.Instance.GetBitmap(R.drawable.platic);
-                            for(int i = 0; i<ResourceManager.Instance.list.size();i++)
-                            {
-                                if(ResourceManager.Instance.list.get(i)=="platic")
-                                {
-                                    ResourceManager.Instance.list.remove(i);
-                                }
-                            }
-                            type=1;
+                    } else if (YSP + 100 < FYSP) {
+                        if (currlane == 2) {
 
-
-                        } else if (currlane == 2&& asd[2]!=null){
-
-                            holding=ResourceManager.Instance.GetBitmap(R.drawable.metal);
-                            for(int i = 0; i<ResourceManager.Instance.list.size();i++)
-                            {
-                                if(ResourceManager.Instance.list.get(i)=="metal")
-                                {
-                                    ResourceManager.Instance.list.remove(i);
-                                }
-                            }
-                            type=2;
-
+                        } else {
+                            currlane++;
                         }
                     }
                 }
-                else
-                {
-                    if(holding!=null)
-                    {
-                        ShotBMP.add(holding);
-                        ArrayList<Float> setPos=new ArrayList<>();
+                else {
+                    if (XSP + 100 < FXSP) {
+                        if (holding == null) {
+                            if (currlane == 0 && asd[0] != null) {
+                                holding = ResourceManager.Instance.GetBitmap(R.drawable.paper);
+                                for (int i = 0; i < ResourceManager.Instance.list.size(); i++) {
+                                    if (ResourceManager.Instance.list.get(i) == "paper") {
+                                        ResourceManager.Instance.list.remove(i);
+                                    }
+                                }
+                                type = 0;
+                            } else if (currlane == 1 && asd[1] != null) {
+                                holding = ResourceManager.Instance.GetBitmap(R.drawable.platic);
+                                for (int i = 0; i < ResourceManager.Instance.list.size(); i++) {
+                                    if (ResourceManager.Instance.list.get(i) == "platic") {
+                                        ResourceManager.Instance.list.remove(i);
+                                    }
+                                }
+                                type = 1;
 
-                        setPos.add(xPos);
-                        setPos.add(yPos);
-                        setPos.add(type);
 
-                        ShotPos.add(setPos);
-                        holding=null;
+                            } else if (currlane == 2 && asd[2] != null) {
+
+                                holding = ResourceManager.Instance.GetBitmap(R.drawable.metal);
+                                for (int i = 0; i < ResourceManager.Instance.list.size(); i++) {
+                                    if (ResourceManager.Instance.list.get(i) == "metal") {
+                                        ResourceManager.Instance.list.remove(i);
+                                    }
+                                }
+                                type = 2;
+
+                            }
+                        }
+                    } else if (XSP - 100 > FXSP) {
+                        if (holding != null) {
+                            ShotBMP.add(holding);
+                            ArrayList<Float> setPos = new ArrayList<>();
+
+                            setPos.add(xPos);
+                            setPos.add(yPos);
+                            setPos.add(type);
+
+                            ShotPos.add(setPos);
+                            holding = null;
+                        }
                     }
                 }
 
@@ -267,8 +261,18 @@ public class PlayerM4 implements EntityBase,Collidable{
                 endGame=true;
             }
         }
+        //delete stuff so no unused stuff
+        deleteTimer-=_dt;
+        if(deleteTimer<=0) {
+            deleteTimer=5;
 
-
+            for (int i = 0; i < ShotPos.size(); i++) {
+                if (ShotPos.get(i).get(0) < 0) {
+                    ShotPos.remove(i);
+                    ShotBMP.remove(i);
+                }
+            }
+        }
 
 
     }

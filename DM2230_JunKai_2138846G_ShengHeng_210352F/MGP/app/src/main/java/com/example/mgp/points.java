@@ -142,8 +142,6 @@ public class points implements EntityBase{
                 _canvas.drawText("HIGHSCORE:"+GameSystem.Instance.GetIntinSave("MG3hs"),ScreenW/2-500,ScreenH/3,paint);
 
             }
-
-
         }
         else
         {
@@ -176,7 +174,17 @@ public class points implements EntityBase{
                 Gson g=new Gson();
                 String t=g.toJson(OverAllScore);
                 GameSystem.Instance.SaveEditBegin();
-                GameSystem.Instance.SetString("OAS",t);
+                if(ResourceManager.Instance.state==0) {
+                    GameSystem.Instance.SetString("OAS",t);
+                }
+                else if(ResourceManager.Instance.state==2)
+                {
+                    GameSystem.Instance.SetString("MG2",t);
+                }
+                else if(ResourceManager.Instance.state==3)
+                {
+                    GameSystem.Instance.SetString("MG3",t);
+                }
                 GameSystem.Instance.SaveEditEnd();
 
                 GetNameDialog GND=new GetNameDialog();

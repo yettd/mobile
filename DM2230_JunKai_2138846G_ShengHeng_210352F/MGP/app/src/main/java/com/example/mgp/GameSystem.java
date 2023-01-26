@@ -83,6 +83,7 @@ public class GameSystem {
         StateManager.Instance.AddState(new messageStage());
         StateManager.Instance.AddState(new miniGameShowPoint());
         StateManager.Instance.AddState(new Leaderboard());
+        StateManager.Instance.AddState(new GameChoser());
 
     }
 

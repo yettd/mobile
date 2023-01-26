@@ -134,12 +134,7 @@ int type;
                 else
                 {
                    Dropper.Instance.SetGetOut(true);
-                    int p = GameSystem.Instance.GetIntinSave("lives");
-                    p--;
-                    GameSystem.Instance.SaveEditBegin();
 
-                    GameSystem.Instance.SetIntinSave("lives", p);
-                    GameSystem.Instance.SaveEditEnd();
                     return;
                 }
                 Dropper.Instance.Reset();
