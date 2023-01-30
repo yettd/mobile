@@ -241,3 +241,7 @@ public class TrashBinForGame4 implements EntityBase{
     }
 
 }
+
+
+
+
