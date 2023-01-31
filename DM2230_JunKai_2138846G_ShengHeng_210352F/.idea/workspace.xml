@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91dac9aa-5313-4995-aa3a-8a572c581b00" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/MGP/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/Dropper.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/Dropper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/EnitiySmurf.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/EnitiySmurf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/GameSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/GameSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/MainGameSceneState.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/MainGameSceneState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/Mainmenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/Mainmenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/PlayerM4.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/PlayerM4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/ResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/ResourceManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/TrashBinForGame4.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/TrashBinForGame4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/fakerLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/fakerLoad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/miniGame4.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/miniGame4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/points.java" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/java/com/example/mgp/points.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MGP/app/src/main/res/layout/mainmenu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MGP/app/src/main/res/layout/mainmenu.xml" afterDir="false" />
-    </list>
+    <list default="true" id="91dac9aa-5313-4995-aa3a-8a572c581b00" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

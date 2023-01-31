@@ -135,15 +135,7 @@ public class TrashBinForGame4 implements EntityBase{
         {
             return;
         }
-        if(timer>0)
-        {
-            timer-=_dt;
-        }
-        else
-        {
-            xPos+=bmp.getWidth()*2;
-            timer=2;
-        }
+        xPos+=50*_dt;
 
 
         if(xPos>=screenWidth)
@@ -159,6 +151,18 @@ public class TrashBinForGame4 implements EntityBase{
 
 
         if(status) {
+            if(xPos>=screenWidth)
+            {
+
+                int p = GameSystem.Instance.GetIntinSave("lives");
+                p--;
+                GameSystem.Instance.SaveEditBegin();
+
+                GameSystem.Instance.SetIntinSave("lives", p);
+                GameSystem.Instance.SaveEditEnd();
+                status=false;
+            }
+
             for (int i = 0; i < PlayerM4.Instance.ShotBMP.size(); i++) {
                 if( PlayerM4.Instance.ShotBMP.get(i)!=null) {
                     if (

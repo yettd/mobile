@@ -81,7 +81,7 @@ public class MainGameSceneState implements StateBase {
                 else
                 {
 
-                    StateManager.Instance.ChangeState("miniGame4");
+                    StateManager.Instance.ChangeState("miniGame3");
 
 
                 }

@@ -140,6 +140,17 @@ public class PlayerM4 implements EntityBase,Collidable{
                 asd[2] = null;
             }
         }
+        else
+        {
+            if(asd[0]==null ||asd[2]==null ||asd[1]==null ) {
+                bmp = ResourceManager.Instance.GetBitmap(R.drawable.paper);
+                asd[0] = bmp;
+                bmp = ResourceManager.Instance.GetBitmap(R.drawable.platic);
+                asd[1] = bmp;
+                bmp = ResourceManager.Instance.GetBitmap(R.drawable.metal);
+                asd[2] = bmp;
+            }
+        }
         yPos = Lane[currlane];
         moveProjectile();
 
