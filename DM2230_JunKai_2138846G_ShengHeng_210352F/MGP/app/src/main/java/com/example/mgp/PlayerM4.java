@@ -133,11 +133,32 @@ public class PlayerM4 implements EntityBase,Collidable{
             if (!ResourceManager.Instance.list.contains("paper")) {
                 asd[0] = null;
             }
+            else
+            {
+                if(asd[0]==null) {
+                    bmp = ResourceManager.Instance.GetBitmap(R.drawable.paper);
+                    asd[0] = bmp;
+                }
+            }
             if (!ResourceManager.Instance.list.contains("platic")) {
                 asd[1] = null;
             }
+            else
+            {
+                if(asd[1]==null) {
+                    bmp = ResourceManager.Instance.GetBitmap(R.drawable.platic);
+                    asd[1] = bmp;
+                }
+            }
             if (!ResourceManager.Instance.list.contains("metal")) {
                 asd[2] = null;
+            }
+            else
+            {
+                if(asd[2]==null) {
+                    bmp = ResourceManager.Instance.GetBitmap(R.drawable.metal);
+                    asd[2] = bmp;
+                }
             }
         }
         else
@@ -258,6 +279,13 @@ public class PlayerM4 implements EntityBase,Collidable{
             }
         }
 
+        for (int i =0;i<ShotBMP.size();i++)
+        {
+            if(ShotPos.get(i).get(0)<=0)
+            {
+                ShotBMP.set(i,null);
+            }
+        }
         if(ResourceManager.Instance.list.size()==0 && holding==null && ResourceManager.Instance.state==0)
         { boolean end=true;
             for (int i =0;i<ShotBMP.size();i++)

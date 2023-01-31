@@ -1,0 +1,16 @@
+Task List
+-------------------
+Sheng heng:
+Player movement for the runner part of the game
+Spawning of the different material
+Collecting data of the material collected
+Audio
+dialogAlret(restart game and getting name)
+
+Jun Kai
+The two mini games
+Message state for no material to play minigame
+pause
+Leaderboard
+Score
+game selection screen

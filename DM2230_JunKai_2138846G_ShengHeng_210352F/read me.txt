@@ -25,26 +25,22 @@ By the end of the minigame all material they collected is clear
 
 Second mini game
 
-The player will go in order of the material they collected.
-The player will flick their screen and launch the player toward a trash bin
-The player can bounce of the top of the screen but not the bottom of it
-If the player hit the wrong trash bin they lose a life and change to the next material
-If the completely misses they just change to the next material 
-If they hit the correct they gain a point and change to the next material
--------------------
-Task List
--------------------
-Sheng heng:
-Player movement for the runner part of the game
-Spawning of the different material
-Collecting data of the material collected
-Audio
+The player can move up and down by swiping up and down
+The player will pick up the rubbish at the right side by swiping right and collecting what is to their right
+The player will shoot it at the oncoming trash can by swiping left
+if the trash is the same as the bin earn point
+else lose a live
+minigame ends when there no trash to collect and the last trash shot collide with something or out of the screen
 
-Jun Kai
-The two mini games
-Message state for no material to play minigame
-pause
-dialogAlret
-Score
+LeaderBoard
+------------
+when a player finish their game if they are top three will be promt a dialog box that ask for their name
+The LearderBoard have three catergory
+Overall- the maingame with the running and minigame combine
+Dropper- the first minigame
+Server- the second minigame
+Each catergroy have their own respective highscore as well
+
+-------------------
 
 

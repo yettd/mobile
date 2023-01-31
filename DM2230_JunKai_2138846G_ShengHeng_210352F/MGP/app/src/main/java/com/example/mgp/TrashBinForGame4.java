@@ -14,6 +14,7 @@ public class TrashBinForGame4 implements EntityBase{
     private boolean isPause=false;
 
     private Bitmap bmp=null;
+    private Bitmap explode=null;
 
 
     private Bitmap scalebmp=null;
@@ -22,7 +23,7 @@ public class TrashBinForGame4 implements EntityBase{
     int screenWidth,screenHeight;
     float buttonDelay=0;
 
-
+    float timerExplode=1;
     boolean status=true;
     int LOR;
     int type;
@@ -54,7 +55,7 @@ public class TrashBinForGame4 implements EntityBase{
         bins[1]=bmp;
         bmp=ResourceManager.Instance.GetBitmap(R.drawable.metalbin);
         bins[2]=bmp;
-
+        explode=ResourceManager.Instance.GetBitmap(R.drawable.star);
         Random r=new Random();
         while (true) {
             type = r.nextInt(3);
@@ -133,10 +134,12 @@ public class TrashBinForGame4 implements EntityBase{
 
         if(!status)
         {
+            timerExplode-=_dt;
             return;
         }
-        xPos+=50*_dt;
-
+        if(status) {
+            xPos += 100 * _dt;
+        }
 
         if(xPos>=screenWidth)
         {
@@ -215,6 +218,14 @@ public class TrashBinForGame4 implements EntityBase{
                 bmp = ResourceManager.Instance.GetBitmap(R.drawable.metalbin);
             }
             _canvas.drawBitmap(bmp, xPos, yPos, null);
+        }
+        else
+        {
+            if(timerExplode>0)
+            {
+                _canvas.drawBitmap(explode, xPos, yPos, null);
+
+            }
         }
     }
 
